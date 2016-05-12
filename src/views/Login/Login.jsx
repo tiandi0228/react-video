@@ -1,22 +1,22 @@
-import React, {Component} from 'react';
+import React from 'react';
 
-export default class Login extends Component {
+const Login = React.createClass({
 
-  getBgUrl() {
+  getBgUrl: function() {
     return { pic: ['http://image3.cnpp.cn/upload2/news/20130921/162851_97101_url.jpg', 'http://tupian.enterdesk.com/2012/1026/gha/2/enterdesk%20%286%29.jpg', 'http://uploadfile.bizhizu.cn/2014/1220/20141220024927248.jpg'] };
-  }
+  },
 
-  handleSubmit(event) {
-    event.preventDefault();
+  handleSubmit: function(e) {
+    e.preventDefault();
     // var post = {
     //   username : this.refs.username.value,
     //   password : this.refs.password.value,
     // }
     //this.setState({ userInput: event.target.value });
-    console.log(this.refs.username);
-  }
+    console.log(this.refs['username']);
+  },
 
-  render() {
+  render: function() {
     const styles = require('./Login.css');
     return (
       <div className="login">
@@ -44,4 +44,4 @@ export default class Login extends Component {
       </div>
     );
   }
-}
+});

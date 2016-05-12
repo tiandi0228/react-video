@@ -42,7 +42,8 @@ fieldset, img {
     border: 0
 }
 button, input, select, textarea {
-    font-size: 100%
+    font-size: 100%;
+    outline: none;
 }
 table {
     border-collapse: collapse;

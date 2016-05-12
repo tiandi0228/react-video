@@ -4,7 +4,7 @@
 .login .loginBg{
   width: 100%;
   height: 100%;
-  background: url(http://mlf.8531.cn/mediacube/login/img/loadingPage-bg.jpg) no-repeat center fixed;
+  background: url(http://uploadfile.bizhizu.cn/2014/1220/20141220024927248.jpg) no-repeat center fixed;
   position: fixed;
   top: 0;
   left: 0;
@@ -12,13 +12,13 @@
 }
 .login-box{
   width: 300px;
-  height: 220px;
+  height: 290px;
   border: 1px #ccc solid;
   border-radius: 10px;
   position: absolute;
   top: 50%;
   left: 50%;
-  margin: -110px 0 0 -150px;
+  margin: -145px 0 0 -150px;
   background: #fff;
   opacity: 0.9;
   z-index: 2;
@@ -26,37 +26,55 @@
 .login .name{
   font-size: 2rem;
   text-align: center;
-  padding: 10px 0;
+  padding: 10px 0 0 0;
 }
 .login .list{
-  height: 40px;
-  margin-top: 5px;
+  overflow: hidden;
 }
 .login .list .label{
   font-size: 1.4rem;
-  line-height: 30px;
-  width: 60px;
-  color: #888;
-  text-align: right;
-  margin-right: 10px;
+  width: 260px;
+  color: #848585;
+  text-align: left;
+  margin-left: 10px;
+  display: block;
+  margin: 10px 0 10px 30px;
 }
 .login .list .txt{
-  width: 190px;
+  width: 230px;
   height: 28px;
   border: 1px #ccc solid;
   padding: 0 5px;
+  display: block;
+  margin: 0 30px;
+  color: #848585;
+}
+.login .list .unlogn{
+  margin: 10px 0 10px 30px;
+  display: block;
+  color: #848585;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.login .list .unlogn .checkbox{
+  margin:3px 5px 0 0;
 }
 .login .list .btn{
-  width: 200px;
+  width: 240px;
   height: 30px;
   border: 1px #ccc solid;
-  margin: 0 0 0 70px;
+  margin: 10px 0 10px 30px;
   cursor: pointer;
+  background-color: #1ABA9E;
+  border: 0px;
+  border-bottom: 2px solid #199984;
+  color: #fff;
+  font-size: 1.6rem;
 }
 .login .foot a{
   float:right;
   color: #000; 
   margin-right: 30px;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-weight: 700;
 }
