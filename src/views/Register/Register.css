@@ -1,51 +1,31 @@
-.login {
-
-}
-.login .loginBg{
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: 1;
-}
-.login .bg {
-  background-image: url(img/1.jpg);
+body{
+  background-image: url(../Login/img/1.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
   position: fixed;
 }
-.login .bg1{
-  background-image: url(img/1.jpg);
-}
-.login .bg2{
-  background-image: url(img/2.jpg);
-}
-.login .bg3{
-  background-image: url(img/3.jpg);
-}
-.login-box{
+.register {
   width: 300px;
-  height: 290px;
+  height: 350px;
   border: 1px #ccc solid;
   border-radius: 10px;
   position: fixed;
   top: 50%;
   left: 50%;
-  margin: -145px 0 0 -150px;
+  margin: -145px 0 0 -175px;
   background: #fff;
   opacity: 0.8;
-  z-index: 2;
 }
-.login .name{
+.register .name{
   font-size: 2rem;
   text-align: center;
   padding: 10px 0 0 0;
 }
-.login .list{
+.register .list{
   overflow: hidden;
 }
-.login .list .label{
+.register .list .label{
   font-size: 1.4rem;
   width: 260px;
   color: #848585;
@@ -54,7 +34,7 @@
   display: block;
   margin: 10px 0 10px 30px;
 }
-.login .list .txt{
+.register .list .txt{
   width: 230px;
   height: 28px;
   border: 1px #ccc solid;
@@ -63,17 +43,7 @@
   margin: 0 30px;
   color: #848585;
 }
-.login .list .unlogn{
-  margin: 10px 0 10px 30px;
-  display: block;
-  color: #848585;
-  font-size: 1.2rem;
-  cursor: pointer;
-}
-.login .list .unlogn .checkbox{
-  margin:3px 5px 0 0;
-}
-.login .list .btn{
+.register .list .btn{
   width: 240px;
   height: 30px;
   border: 1px #ccc solid;
@@ -85,7 +55,7 @@
   color: #fff;
   font-size: 1.6rem;
 }
-.login .foot a{
+.register .foot a{
   float:right;
   color: #000; 
   margin-right: 30px;

@@ -5,8 +5,9 @@ blockquote, body, button, dd, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, hr
     margin: 0;
     padding: 0
 }
-body, button, input, select, textarea {
-    font: 12px/1.5 tahoma, arial, 'Hiragino Sans GB', '\5b8b\4f53', sans-serif;
+body {
+    font-size: 1.4rem;
+    font-family: tahoma, arial, 'Hiragino Sans GB', '\5b8b\4f53', sans-serif;
 }
 h1, h2, h3, h4, h5, h6 {
     font-size: 100%
@@ -21,13 +22,14 @@ small {
     font-size: 12px
 }
 ol, ul {
-    list-style: none
+    list-style: none;
 }
 a {
-    text-decoration: none
+    text-decoration: none;
 }
 a:hover {
-    text-decoration: underline
+    text-decoration: underline;
+    cursor: pointer;
 }
 sup {
     vertical-align: text-top
@@ -51,4 +53,7 @@ table {
 }
 .fl {
     float: left;
+}
+.fr {
+    float: right;  
 }

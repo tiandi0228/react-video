@@ -1,0 +1,32 @@
+header{
+    height:40px;
+    background: #ccc;
+    font-size: 1.4rem;
+}
+header .user li{
+    float: left;
+    line-height: 40px;
+    padding-right: 10px;
+}
+.logo {
+    line-height: 40px;
+    font-size: 1.6rem;
+    padding: 0 10px;
+    color: #666;
+}
+nav {
+    line-height: 40px;
+    padding-left: 80px;
+}
+nav li{
+    float: left;
+    width: 60px;
+    text-align: center;
+}
+footer{
+    height: 30px;
+    font-size: 1.4rem;
+    text-align: center;
+    color: #ccc;
+    padding: 20px 0;
+}

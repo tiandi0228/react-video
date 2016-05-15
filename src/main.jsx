@@ -2,26 +2,30 @@
 
 import React from 'react';
 import { render } from 'react-dom';
+import { Provider } from 'react-redux';
 import cookie from 'react-cookie';
+import { Router, Route, Link, IndexRoute, browserHistory } from 'react-router';
+import Home from './views/Home/Home.jsx';
 import Login from './views/Login/Login.jsx';
 import Register from './views/Register/Register.jsx';
 
-// 默认
-const Video = React.createClass({
-
-  componentDidMount: function () {
-    console.log(cookie.load('username'));
-  },
-
-  render: function () {
+class Main extends React.Component {
+  render() {
     const styles = require('./main.css');
     return (
       <div>
-        <Register />
-        <Login />
+        {this.props.children}
       </div>
-    );
+    )
   }
-});
+};
 
-render(<Video />, document.getElementById('app'), function () { console.log('渲染成功！') });
+render((
+  <Router history={browserHistory}>
+    <Route path="/" component={Main}>
+      <IndexRoute component={Home} />
+      <Route path="login" component={Login} />
+      <Route path="register" component={Register} />
+    </Route>
+  </Router>
+), document.getElementById('app'), function () { console.log('渲染成功！') });
