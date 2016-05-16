@@ -1,0 +1,17 @@
+.tasks{
+    margin:20px 30px;
+}
+.tasks .tit h2{
+    font-size: 2rem;
+}
+.tasks .tit span{
+    width: 100px;
+    height: 30px;
+    background: #428bca;
+    display: block;
+    text-align: center;
+    line-height: 30px;
+    font-size: 1.6rem;
+    color: #fff;
+    cursor: pointer;
+}

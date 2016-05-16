@@ -3,8 +3,8 @@
 import React from 'react';
 import request from 'superagent';
 
-// 价格
-class Price extends React.Component {
+// 说明
+class Explain extends React.Component {
 
     constructor() {
         super();
@@ -18,31 +18,29 @@ class Price extends React.Component {
             .get('video.json')
             .end(function (err, res) {
                 if (err) throw err;
-                var price = JSON.parse(res.text).price;
-                this.setState({ data: price });
+                var explain = JSON.parse(res.text).explain;
+                this.setState({ data: explain });
             }.bind(this));
     }
 
     render() {
         const styles = require('./Common.css');
-        const priceItems = this.state.data.map(function (item) {
+        const explainItems = this.state.data.map(function (item) {
             return (
-                <ul key={item.id}>
-                    <li>{item.name}</li>
-                    <li>{item.content}</li>
-                    <li>{item.status}</li>
-                </ul>
+                <li key={item.id}>{item.content}</li>
             );
         });
         return (
-            <div className="price">
-                <div className="tit">价格</div>
+            <div className="recharge mt20">
+                <div className="tit">说明</div>
                 <div className="con">
-                    {priceItems}
+                    <ul>
+                        {explainItems}
+                    </ul>
                 </div>
             </div>
         )
     }
 };
 
-export default Price;
+export default Explain;

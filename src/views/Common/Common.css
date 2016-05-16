@@ -5,6 +5,9 @@ header{
     box-shadow: 0 0 1px 2px rgba(0,0,0,0.15);
     background: #fff;
 }
+header .user{
+    margin-right: 20px;
+}
 header .user li{
     float: left;
     line-height: 40px;
@@ -13,7 +16,7 @@ header .user li{
 .logo {
     line-height: 40px;
     font-size: 1.6rem;
-    padding: 0 10px;
+    padding: 0 30px;
     color: #666;
 }
 nav {
@@ -25,13 +28,13 @@ nav li{
     width: 60px;
     text-align: center;
 }
-.notice,.price {
-    width: 49%;
+.notice,.price,.recharge {
+    width: 100%;
     border-radius: 3px;
     overflow: hidden;
     background: #fff;
 }
-.tit{
+.notice .tit,.price .tit,.recharge .tit{
     height: 40px;
     background: #428bca;
     line-height: 40px;
@@ -39,14 +42,14 @@ nav li{
     padding: 0 20px;
     color: #fff;
 }
-.con {
+.notice .con,.price .con,.recharge .con {
     padding: 10px;
     border-width: 0 1px 1px 1px;
     border-color: #ccc;
     border-style: solid;
     overflow: hidden;
 }
-.con li{
+.notice .con li,.price .con li,.recharge .con li{
     line-height: 25px;
     font-size: 1.4rem;
     padding: 10px 0;
@@ -54,10 +57,12 @@ nav li{
 }
 .price .con ul{
     overflow: hidden;
+    border-bottom: 1px #ccc dashed;
 }
 .price .con li{
     float:left;
     width: 33%;
+    border-bottom: none;
 }
 footer{
     height: 30px;

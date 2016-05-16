@@ -31,7 +31,7 @@ class Notice extends React.Component {
             );
         });
         return (
-            <div className="notice fl">
+            <div className="notice">
                 <div className="tit">公告</div>
                 <div className="con">
                     <ul>

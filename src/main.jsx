@@ -8,6 +8,7 @@ import { Router, Route, Link, IndexRoute, browserHistory } from 'react-router';
 import Home from './views/Home/Home.jsx';
 import Login from './views/Login/Login.jsx';
 import Register from './views/Register/Register.jsx';
+import Tasks from './views/Tasks/Tasks.jsx';
 
 class Main extends React.Component {
   render() {
@@ -26,6 +27,7 @@ render((
       <IndexRoute component={Home} />
       <Route path="login" component={Login} />
       <Route path="register" component={Register} />
+      <Route path="tasks" component={Tasks} />
     </Route>
   </Router>
 ), document.getElementById('app'), function () { console.log('渲染成功！') });
