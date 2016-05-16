@@ -1,7 +1,9 @@
 header{
     height:40px;
-    background: #ccc;
     font-size: 1.4rem;
+    border-top: 2px solid #fa7d3c;
+    box-shadow: 0 0 1px 2px rgba(0,0,0,0.15);
+    background: #fff;
 }
 header .user li{
     float: left;
@@ -22,6 +24,40 @@ nav li{
     float: left;
     width: 60px;
     text-align: center;
+}
+.notice,.price {
+    width: 49%;
+    border-radius: 3px;
+    overflow: hidden;
+    background: #fff;
+}
+.tit{
+    height: 40px;
+    background: #428bca;
+    line-height: 40px;
+    font-size: 1.6rem;
+    padding: 0 20px;
+    color: #fff;
+}
+.con {
+    padding: 10px;
+    border-width: 0 1px 1px 1px;
+    border-color: #ccc;
+    border-style: solid;
+    overflow: hidden;
+}
+.con li{
+    line-height: 25px;
+    font-size: 1.4rem;
+    padding: 10px 0;
+    border-bottom: 1px #ccc dashed;
+}
+.price .con ul{
+    overflow: hidden;
+}
+.price .con li{
+    float:left;
+    width: 33%;
 }
 footer{
     height: 30px;
