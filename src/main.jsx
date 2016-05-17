@@ -2,8 +2,6 @@
 
 import React from 'react';
 import { render } from 'react-dom';
-import { Provider } from 'react-redux';
-import cookie from 'react-cookie';
 import { Router, Route, Link, IndexRoute, browserHistory } from 'react-router';
 import Home from './views/Home/Home.jsx';
 import Login from './views/Login/Login.jsx';

@@ -13,6 +13,7 @@ class Price extends React.Component {
         this.state = {
             data: []
         };
+        
         // AJAX
         request
             .get('video.json')

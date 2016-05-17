@@ -1,0 +1,44 @@
+.create {
+    width: 0;
+    height: 0;
+    padding: 5%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin: -20% 0 0 -40%;
+    background: #fff;
+    border: 1px #ccc solid;
+    opacity: 0;
+    border-radius: 5px;
+    z-index: 999;
+}
+.cur{
+    width: 80%;
+    height: 40%;
+    opacity: 1;
+}
+.close {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    background: #fff;
+    border: 1px #ccc solid;
+    border-radius: 20px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 1.6rem;
+    cursor: pointer;
+}
+.make {
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: 0.5;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 888;
+}
