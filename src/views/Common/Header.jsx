@@ -31,7 +31,6 @@ class Header extends React.Component {
                 <ul className="fr user">
                     <li>欢迎回来，{this.state.username}</li>
                     <li><Link to="/login">个人资料</Link></li>
-                    <li><Link to="/login">登录</Link></li>
                     <li>金额:10.00</li>
                     <li><a onClick={this.logout}>退出</a></li>
                 </ul>
