@@ -1,21 +1,15 @@
 .create {
-    width: 0;
-    height: 0;
-    padding: 5% 2%;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    margin: -100px 0 0 -280px;
-    background: #fff;
-    border: 1px #ccc solid;
-    opacity: 0;
-    border-radius: 5px;
-    z-index: 999;
-}
-.cur{
     width: 560px;
     height: 200px;
-    opacity: 1;
+    padding: 5% 2%;
+    position: fixed;
+    top: -300px;
+    left: 50%;
+    margin: 0 0 0 -280px;
+    background: #fff;
+    border: 1px #ccc solid;
+    border-radius: 5px;
+    z-index: 999;
 }
 .close {
     width: 30px;
