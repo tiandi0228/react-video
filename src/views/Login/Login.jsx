@@ -11,21 +11,21 @@ const Login = React.createClass( {
     // 背景图替换
     this.timer = setInterval(function () {
       for (var i = 0; i < 4; i++) {
-        var bg = document.getElementById('loginBg');
+        const bg = document.getElementById('loginBg');
         bg.className = 'loginBg bg bg' + Math.ceil(Math.random() * i);
       }
     }.bind(this), 5000);
 
     // 设置Cookie
     if (cookie.load('username') != undefined) {
-      var oUserName = document.getElementById('username');
+      const oUserName = document.getElementById('username');
       oUserName.value = cookie.load('username');
     }
   },
 
   login(e) {
     e.preventDefault();
-    var post = {
+    const post = {
       username: this.refs.username.value,
       password: this.refs.password.value
     }
