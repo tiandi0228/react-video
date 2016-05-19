@@ -34,3 +34,15 @@
     font-size: 14px;
     line-height: 30px;
 }
+.list ul{
+    border-bottom: 1px #000 solid;
+    height: 30px;
+    overflow: hidden;
+}
+.list ul li{
+    float: left;
+    width: 12.5%;
+    text-align: center;
+    line-height: 30px;
+    font-size: 14px;
+}

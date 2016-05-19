@@ -4,6 +4,7 @@ import React from 'react';
 import Header from './../Common/Header.jsx';
 import Footer from './../Common/Footer.jsx';
 import Create from './../Create/Create.jsx';
+import request from 'superagent';
 
 // 任务
 class Tasks extends React.Component {
@@ -21,8 +22,8 @@ class Tasks extends React.Component {
             .get('video.json')
             .end(function (err, res) {
                 if (err) throw err;
-                var notice = JSON.parse(res.text).notice;
-                this.setState({data: notice});
+                var price = JSON.parse(res.text).price;
+                this.setState({data: price});
             }.bind(this));
     }
     
@@ -46,6 +47,20 @@ class Tasks extends React.Component {
     
     render() {
         const styles = require('./Tasks.css');
+        const noticeItems = this.state.data.map(function (item) {
+            return (
+                <ul key={item.id}>
+                    <li>{item.id}</li>
+                    <li title={item.content}>{item.content}</li>
+                    <li>10000</li>
+                    <li>20000</li>
+                    <li>19999</li>
+                    <li>{item.status}</li>
+                    <li>2016-05-19</li>
+                    <li>[删除]</li>
+                </ul>
+            );
+        });
         return (
             <div>
                 <Header />
@@ -65,6 +80,7 @@ class Tasks extends React.Component {
                             <li>创建于</li>
                             <li>操作</li>
                         </ol>
+                        {noticeItems}
                     </div>
                 </div>
                 <Create />
