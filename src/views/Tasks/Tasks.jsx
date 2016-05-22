@@ -8,25 +8,37 @@ import request from 'superagent';
 
 // 任务
 class Tasks extends React.Component {
-    
+
     constructor() {
         super();
-        
+
         // 初始
         this.state = {
             data: []
         };
-        
+
         // AJAX
         request
             .get('video.json')
             .end(function (err, res) {
                 if (err) throw err;
-                var price = JSON.parse(res.text).price;
-                this.setState({data: price});
+                var tasks = JSON.parse(res.text).tasks;
+                this.setState({ data: tasks });
             }.bind(this));
     }
-    
+
+    // 删除
+    handleDel(e) {
+        var delIndex = e.target.getAttribute('data-key');
+        console.log(delIndex);
+        // request
+        //     .del('video.json')
+        //     .query('id=1')
+        //     .end(function (err, res) {
+
+        //     });
+    }
+
     //添加
     create(e) {
         e.preventDefault();
@@ -44,23 +56,23 @@ class Tasks extends React.Component {
             }
         }, 100)
     }
-    
+
     render() {
         const styles = require('./Tasks.css');
-        const noticeItems = this.state.data.map(function (item) {
+        const tasksItems = this.state.data.map(function (item) {
             return (
                 <ul key={item.id}>
                     <li>{item.id}</li>
-                    <li title={item.content}>{item.content}</li>
-                    <li>10000</li>
-                    <li>20000</li>
-                    <li>19999</li>
+                    <li title={item.url}>{item.url}</li>
+                    <li>{item.initial}</li>
+                    <li>{item.aims}</li>
+                    <li>{item.complete}</li>
                     <li>{item.status}</li>
-                    <li>2016-05-19</li>
-                    <li>[删除]</li>
+                    <li>{item.time}</li>
+                    <li><a onClick={this.handleDel} data-key={item.id}>[删除]</a></li>
                 </ul>
             );
-        });
+        }.bind(this));
         return (
             <div>
                 <Header />
@@ -80,7 +92,7 @@ class Tasks extends React.Component {
                             <li>创建于</li>
                             <li>操作</li>
                         </ol>
-                        {noticeItems}
+                        {tasksItems}
                     </div>
                 </div>
                 <Create />
