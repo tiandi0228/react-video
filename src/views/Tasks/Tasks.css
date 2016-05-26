@@ -46,3 +46,10 @@
     line-height: 30px;
     font-size: 14px;
 }
+.no-data {
+    text-align: center;
+    font-size: 14px;
+    line-height: 30px;
+    height: 30px;
+    border-bottom: 1px #000 solid;
+}

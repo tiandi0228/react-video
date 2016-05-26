@@ -1,10 +1,11 @@
 'use strict';
 
 import React from 'react';
+import cookie from 'react-cookie';
+import $ from 'jquery';
 import Header from './../Common/Header.jsx';
 import Footer from './../Common/Footer.jsx';
 import Create from './../Create/Create.jsx';
-import request from 'superagent';
 
 // 任务
 class Tasks extends React.Component {
@@ -14,29 +15,37 @@ class Tasks extends React.Component {
 
         // 初始
         this.state = {
-            data: []
+            data: [],
+            username: cookie.load('username'),
         };
+        
+        const username = this.state.username;
 
         // AJAX
-        request
-            .get('video.json')
-            .end(function (err, res) {
-                if (err) throw err;
-                var tasks = JSON.parse(res.text).tasks;
-                this.setState({ data: tasks });
-            }.bind(this));
+        $.ajax({
+            url: 'http://www.api.com/task',
+            type: 'GET',
+            data: { username: username },
+            success: function (result) {
+                this.setState({ data: result });
+            }.bind(this)
+        });
     }
 
     // 删除
     handleDel(e) {
-        var delIndex = e.target.getAttribute('data-key');
-        console.log(delIndex);
-        // request
-        //     .del('video.json')
-        //     .query('id=1')
-        //     .end(function (err, res) {
-
-        //     });
+        const r = confirm("确定要删除？");
+        if (r == true) {
+            const delIndex = e.target.getAttribute('data-key');
+            $.ajax({
+                url: 'http://www.api.com/delTask',
+                type: 'GET',
+                data: { id: delIndex },
+                success: function (result) {
+                    this.setState({ data: result });
+                }.bind(this)
+            });
+        }
     }
 
     //添加
@@ -60,18 +69,24 @@ class Tasks extends React.Component {
     render() {
         const styles = require('./Tasks.css');
         const tasksItems = this.state.data.map(function (item) {
-            return (
-                <ul key={item.id}>
-                    <li>{item.id}</li>
-                    <li title={item.url}>{item.url}</li>
-                    <li>{item.initial}</li>
-                    <li>{item.aims}</li>
-                    <li>{item.complete}</li>
-                    <li>{item.status}</li>
-                    <li>{item.time}</li>
-                    <li><a onClick={this.handleDel} data-key={item.id}>[删除]</a></li>
-                </ul>
-            );
+            if (item) {
+                return (
+                    <ul key={item.id}>
+                        <li>{item.id}</li>
+                        <li title={item.url}>{item.url}</li>
+                        <li>{item.initial}</li>
+                        <li>{item.aims}</li>
+                        <li>{item.complete}</li>
+                        <li>{item.status}</li>
+                        <li>{item.time}</li>
+                        <li><a onClick={this.handleDel} data-key={item.id}>[删除]</a></li>
+                    </ul>
+                );
+            } else {
+                return (
+                    <div className="no-data" key={item.id}>对不起，暂无数据！</div>
+                )
+            }
         }.bind(this));
         return (
             <div>
