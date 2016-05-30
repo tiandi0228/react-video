@@ -6,6 +6,7 @@ import $ from 'jquery';
 import Header from './../Common/Header.jsx';
 import Footer from './../Common/Footer.jsx';
 import Create from './../Create/Create.jsx';
+import request from 'superagent';
 
 // 任务
 class Tasks extends React.Component {
@@ -18,18 +19,18 @@ class Tasks extends React.Component {
             data: [],
             username: cookie.load('username'),
         };
-        
+
         const username = this.state.username;
 
-        // AJAX
-        $.ajax({
-            url: 'http://www.api.com/task',
-            type: 'GET',
-            data: { username: username },
-            success: function (result) {
-                this.setState({ data: result });
-            }.bind(this)
-        });
+        // 获取列表
+        request
+            .get('http://www.api.com/task')
+            .query({ username: + username })
+            .end(function (err, res) {
+                if (err) throw err;
+                const tasks = JSON.parse(res.text);
+                this.setState({ data: tasks });
+            }.bind(this));
     }
 
     // 删除
@@ -37,14 +38,12 @@ class Tasks extends React.Component {
         const r = confirm("确定要删除？");
         if (r == true) {
             const delIndex = e.target.getAttribute('data-key');
-            $.ajax({
-                url: 'http://www.api.com/delTask',
-                type: 'GET',
-                data: { id: delIndex },
-                success: function (result) {
-                    this.setState({ data: result });
-                }.bind(this)
-            });
+            request
+                .del('http://www.api.com/delTask')
+                .query({ id: + delIndex })
+                .end(function (err, res) {
+                    console.log(res);
+                }.bind(this));
         }
     }
 
