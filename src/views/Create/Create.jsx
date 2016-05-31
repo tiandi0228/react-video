@@ -1,14 +1,16 @@
 'use strict';
 
 import React from 'react';
-import request from 'superagent';
+import $ from 'jquery';
+import cookie from 'react-cookie';
 
 // 创建任务
 const Create = React.createClass({
 
     getInitialState() {
         return {
-            prices: '1'
+            prices: '1.00',
+            username: cookie.load('username'),
         };
     },
 
@@ -38,6 +40,7 @@ const Create = React.createClass({
         }, 100)
     },
 
+    // 验证
     handleSubmit(e) {
         e.preventDefault();
         const price = this.refs.price;
@@ -55,12 +58,14 @@ const Create = React.createClass({
         if (post['price'] === "0") {
             price.nextSibling.innerHTML = '请选择项目';
             price.nextSibling.style.color = 'red';
-        } else if (post['price'] != "0") {
-            const n = post['num'] * post['price'];
-            this.setState({ prices: n.toFixed(2) });
         } else {
             price.nextSibling.innerHTML = '';
             price.nextSibling.style.color = '';
+        }
+
+        if (post['price'] != "0") {
+            const n = post['num'] * post['price'];
+            this.setState({ prices: n.toFixed(2) });
         }
 
         // 判断视频地址
@@ -88,13 +93,14 @@ const Create = React.createClass({
         }
 
         // AJAX
-        request
-            .get('video.json')
-            .end(function (err, res) {
-                if (err) throw err;
-                var price = JSON.parse(res.text).price;
-                this.setState({ data: price });
-            }.bind(this));
+        $.ajax({
+            url: 'http://www.api.com/createTask',
+            type: 'POST',
+            data: { url: post['url'], target: post['num'], username: this.state.username, price: this.state.prices },
+            success: function (data) {
+                console.log('添加成功');
+            }
+        });
     },
 
     handleReset() {

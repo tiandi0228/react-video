@@ -22,10 +22,10 @@ body{
   text-align: center;
   padding: 10px 0 0 0;
 }
-.register .list{
+.register .list-box{
   overflow: hidden;
 }
-.register .list .label{
+.register .list-box .label{
   font-size: 1.4rem;
   width: 260px;
   color: #848585;
@@ -34,7 +34,7 @@ body{
   display: block;
   margin: 10px 0 10px 30px;
 }
-.register .list .txt{
+.register .list-box .txt{
   width: 230px;
   height: 28px;
   border: 1px #ccc solid;
@@ -43,7 +43,7 @@ body{
   margin: 0 30px;
   color: #848585;
 }
-.register .list .btn{
+.register .list-box .btn{
   width: 240px;
   height: 30px;
   border: 1px #ccc solid;

@@ -33,6 +33,7 @@
     text-align: center;
     font-size: 14px;
     line-height: 30px;
+    overflow: hidden;
 }
 .list ul{
     border-bottom: 1px #000 solid;
@@ -45,6 +46,7 @@
     text-align: center;
     line-height: 30px;
     font-size: 14px;
+    overflow: hidden;
 }
 .no-data {
     text-align: center;

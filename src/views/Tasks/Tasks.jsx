@@ -6,7 +6,6 @@ import $ from 'jquery';
 import Header from './../Common/Header.jsx';
 import Footer from './../Common/Footer.jsx';
 import Create from './../Create/Create.jsx';
-import request from 'superagent';
 
 // 任务
 class Tasks extends React.Component {
@@ -23,27 +22,30 @@ class Tasks extends React.Component {
         const username = this.state.username;
 
         // 获取列表
-        request
-            .get('http://www.api.com/task')
-            .query({ username: + username })
-            .end(function (err, res) {
-                if (err) throw err;
-                const tasks = JSON.parse(res.text);
-                this.setState({ data: tasks });
-            }.bind(this));
+        $.ajax({
+            url: 'http://www.api.com/task',
+            type: 'GET',
+            data: { username: username },
+            success: function (result) {
+                this.setState({ data: result });
+            }.bind(this)
+        });
     }
 
     // 删除
     handleDel(e) {
         const r = confirm("确定要删除？");
-        if (r == true) {
+        if (r === true) {
             const delIndex = e.target.getAttribute('data-key');
-            request
-                .del('http://www.api.com/delTask')
-                .query({ id: + delIndex })
-                .end(function (err, res) {
-                    console.log(res);
-                }.bind(this));
+            $.ajax({
+                url: 'http://www.api.com/delTask',
+                type: 'GET',
+                dataType: 'text',
+                data: { id: delIndex },
+                success: function (response) {
+                    $('#' + delIndex).fadeOut("slow");
+                }
+            });
         }
     }
 
@@ -68,24 +70,18 @@ class Tasks extends React.Component {
     render() {
         const styles = require('./Tasks.css');
         const tasksItems = this.state.data.map(function (item) {
-            if (item) {
-                return (
-                    <ul key={item.id}>
-                        <li>{item.id}</li>
-                        <li title={item.url}>{item.url}</li>
-                        <li>{item.initial}</li>
-                        <li>{item.aims}</li>
-                        <li>{item.complete}</li>
-                        <li>{item.status}</li>
-                        <li>{item.time}</li>
-                        <li><a onClick={this.handleDel} data-key={item.id}>[删除]</a></li>
-                    </ul>
-                );
-            } else {
-                return (
-                    <div className="no-data" key={item.id}>对不起，暂无数据！</div>
-                )
-            }
+            return (
+                <ul key={item.id} id={item.id}>
+                    <li>{item.id}</li>
+                    <li title={item.url}>{item.url}</li>
+                    <li>{item.initial}</li>
+                    <li>{item.target}</li>
+                    <li>{item.brush}</li>
+                    <li>{item.status}</li>
+                    <li>{item.time}</li>
+                    <li><a onClick={this.handleDel} data-key={item.id}>[删除]</a></li>
+                </ul>
+            );
         }.bind(this));
         return (
             <div>
@@ -101,7 +97,7 @@ class Tasks extends React.Component {
                             <li>视频地址</li>
                             <li>初始数量</li>
                             <li>目标数量</li>
-                            <li>完成数量</li>
+                            <li>已刷数量</li>
                             <li>状态</li>
                             <li>创建于</li>
                             <li>操作</li>

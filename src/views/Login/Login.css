@@ -42,10 +42,10 @@
   text-align: center;
   padding: 10px 0 0 0;
 }
-.login .list{
+.login .list-box{
   overflow: hidden;
 }
-.login .list .label{
+.login .list-box .label{
   font-size: 1.4rem;
   width: 260px;
   color: #848585;
@@ -54,7 +54,7 @@
   display: block;
   margin: 10px 0 10px 30px;
 }
-.login .list .txt{
+.login .list-box .txt{
   width: 230px;
   height: 28px;
   border: 1px #ccc solid;
@@ -63,17 +63,17 @@
   margin: 0 30px;
   color: #848585;
 }
-.login .list .unlogn{
+.login .list-box .unlogn{
   margin: 10px 0 10px 30px;
   display: block;
   color: #848585;
   font-size: 1.2rem;
   cursor: pointer;
 }
-.login .list .unlogn .checkbox{
+.login .list-box .unlogn .checkbox{
   margin:3px 5px 0 0;
 }
-.login .list .btn{
+.login .list-box .btn{
   width: 240px;
   height: 30px;
   border: 1px #ccc solid;
