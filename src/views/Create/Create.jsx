@@ -5,23 +5,45 @@ import $ from 'jquery';
 import cookie from 'react-cookie';
 
 // 创建任务
-const Create = React.createClass({
+class Create extends React.Component {
 
-    getInitialState() {
-        return {
-            prices: '1.00',
+    constructor() {
+        super();
+
+        this.state = {
+            prices: '1.00 元',
+            money: '',
+            amounts: '0',
             username: cookie.load('username'),
         };
-    },
 
-    handleChange() {
+        // 获取金额
+        $.ajax({
+            url: 'http://www.api.com/user',
+            type: 'POST',
+            data: { username: this.state.username },
+            success: function (result) {
+                const user = result[0];
+                this.setState({
+                    money: user.money
+                });
+            }.bind(this)
+        });
+    }
+
+    // 验证金额
+    handleChange(e) {
+        e.preventDefault();
         const num = this.refs.num.value;
         const price = this.refs.price.value;
+        const n = num * price;
         if (price != '0') {
-            const n = num * price;
-            this.setState({ prices: n.toFixed(2) });
+            this.setState({ prices: n.toFixed(2) + ' 元' });
         }
-    },
+        if (n > parseFloat(this.state.money)) {
+            this.setState({ prices: '余额不足！' });
+        }
+    }
 
     // 关闭窗口
     close() {
@@ -38,7 +60,7 @@ const Create = React.createClass({
                 oMake.style.display = 'none';
             }
         }, 100)
-    },
+    }
 
     // 验证
     handleSubmit(e) {
@@ -53,59 +75,83 @@ const Create = React.createClass({
             url: url.value,
             num: num.value
         }
+        const n = post['num'] * post['price'];
+        const amount = this.state.money - n.toFixed(2);
+        var flag = false;
 
         // 判断选择项目
         if (post['price'] === "0") {
             price.nextSibling.innerHTML = '请选择项目';
             price.nextSibling.style.color = 'red';
+            flag = false;
         } else {
             price.nextSibling.innerHTML = '';
             price.nextSibling.style.color = '';
+            flag = true;
         }
 
         if (post['price'] != "0") {
-            const n = post['num'] * post['price'];
-            this.setState({ prices: n.toFixed(2) });
+            this.setState({ prices: n.toFixed(2) + ' 元' });
+            flag = true;
+        }
+
+        if (n > this.state.money) {
+            this.setState({ prices: '余额不足！' });
+            flag = false;
+        } else {
+            this.setState({ amounts: amount });
+            //flag = true;
         }
 
         // 判断视频地址
         if (!isUrl.test(post['url'])) {
             url.nextSibling.innerHTML = '请输入视频地址';
             url.nextSibling.style.color = 'red';
+            flag = false;
         } else {
             url.nextSibling.innerHTML = '';
             url.nextSibling.style.color = '';
+            flag = true;
         }
 
         // 判断数量
         if (!isNumber.test(post['num'])) {
             num.nextSibling.innerHTML = '请输入整数';
             num.nextSibling.style.color = 'red';
+            flag = false;
         } else if (post['num'] < 10000) {
             num.nextSibling.innerHTML = '最小数量是10000';
             num.nextSibling.style.color = 'red';
+            flag = false;
         } else if (post['num'] > 10000000) {
             num.nextSibling.innerHTML = '最大数量是10000000';
             num.nextSibling.style.color = 'red';
+            flag = false;
         } else {
             num.nextSibling.innerHTML = '';
             num.nextSibling.style.color = '';
+            flag = true;
         }
+        
+        console.log(flag);
+        if (flag === true) {
+            // AJAX
+            $.ajax({
+                url: 'http://www.api.com/createTask',
+                type: 'POST',
+                data: { url: post['url'], target: post['num'], username: this.state.username, money: this.state.amounts },
+                success: function () {
+                    $('#create').fadeOut("slow");
+                    $('#make').fadeOut("slow");
+                }
+            });
+        };
 
-        // AJAX
-        $.ajax({
-            url: 'http://www.api.com/createTask',
-            type: 'POST',
-            data: { url: post['url'], target: post['num'], username: this.state.username, price: this.state.prices },
-            success: function (data) {
-                console.log('添加成功');
-            }
-        });
-    },
+    }
 
     handleReset() {
         document.form.reset();
-    },
+    }
 
     render() {
         const styles = require('./Create.css');
@@ -114,7 +160,7 @@ const Create = React.createClass({
                 <div className="create" id="create">
                     <div className="close" onClick={this.close}>X</div>
                     <div>
-                        <form name="form" id="form" onSubmit={this.handleSubmit}>
+                        <form name="form" id="form" onSubmit={this.handleSubmit.bind(this) }>
                             <div className="ipt">
                                 <label className="label-name">选择项目：</label>
                                 <select defaultValue="0" ref="price">
@@ -130,12 +176,12 @@ const Create = React.createClass({
                             </div>
                             <div className="ipt">
                                 <label className="label-name">项目数量：</label>
-                                <input type="number" className="number" ref="num" defaultValue={10000} onChange={this.handleChange} />
+                                <input type="number" className="number" ref="num" defaultValue={10000} onChange={this.handleChange.bind(this) } />
                                 <span></span>
                             </div>
                             <div className="ipt">
                                 <label className="label-name">总共价格：</label>
-                                <span style={{ color: '#ff0000' }}>{this.state.prices} 元</span>
+                                <span style={{ color: '#ff0000' }}>{this.state.prices}</span>
                             </div>
                             <div className="ipt">
                                 <button type="submit" className="btn">添 加</button>
@@ -149,6 +195,6 @@ const Create = React.createClass({
             </div>
         )
     }
-});
+};
 
 export default Create;

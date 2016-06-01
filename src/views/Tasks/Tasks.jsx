@@ -16,7 +16,7 @@ class Tasks extends React.Component {
         // 初始
         this.state = {
             data: [],
-            username: cookie.load('username'),
+            username: cookie.load('username')
         };
 
         const username = this.state.username;
@@ -24,7 +24,7 @@ class Tasks extends React.Component {
         // 获取列表
         $.ajax({
             url: 'http://www.api.com/task',
-            type: 'GET',
+            type: 'POST',
             data: { username: username },
             success: function (result) {
                 this.setState({ data: result });
@@ -39,10 +39,10 @@ class Tasks extends React.Component {
             const delIndex = e.target.getAttribute('data-key');
             $.ajax({
                 url: 'http://www.api.com/delTask',
-                type: 'GET',
+                type: 'POST',
                 dataType: 'text',
                 data: { id: delIndex },
-                success: function (response) {
+                success: function (result) {
                     $('#' + delIndex).fadeOut("slow");
                 }
             });

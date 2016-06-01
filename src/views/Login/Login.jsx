@@ -3,10 +3,12 @@
 import React from 'react';
 import cookie from 'react-cookie';
 import { Link } from 'react-router';
+import $ from 'jquery';
 
-const Login = React.createClass( {
+class Login extends React.Component {
 
-  componentDidMount() {
+  constructor() {
+    super();
 
     // 背景图替换
     this.timer = setInterval(function () {
@@ -21,7 +23,7 @@ const Login = React.createClass( {
       const oUserName = document.getElementById('username');
       oUserName.value = cookie.load('username');
     }
-  },
+  }
 
   login(e) {
     e.preventDefault();
@@ -31,7 +33,12 @@ const Login = React.createClass( {
     }
     // 保存Cookie
     cookie.save('username', post['username'], { path: '/' });
-  },
+
+    $.ajax({
+
+    });
+
+  }
 
   render() {
     const styles = require('./Login.css');
@@ -49,7 +56,7 @@ const Login = React.createClass( {
             <input type="password" ref="password" placeholder="请输入密码" className="txt" />
           </div>
           <div className="list-box">
-            <button type="submit" className="btn" block ref='submit' onClick={this.login}>登 录</button>
+            <button type="submit" className="btn" block ref='submit' onClick={this.login.bind(this)}>登 录</button>
           </div>
           <div className="foot">
             <Link to="/register">没有账号？直接注册</Link>
@@ -58,6 +65,6 @@ const Login = React.createClass( {
       </div>
     );
   }
-});
+};
 
 export default Login;

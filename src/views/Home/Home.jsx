@@ -18,11 +18,11 @@ class Home extends React.Component {
             <div>
                 <Header />
                 <div className="home">
-                    <div className="fl" style={{width:width}}>
+                    <div className="fl" style={{ width: width }}>
                         <Notice />
                         <Recharge />
                     </div>
-                    <div className="fr" style={{width:width}}>
+                    <div className="fr" style={{ width: width }}>
                         <Price />
                         <Explain />
                     </div>
