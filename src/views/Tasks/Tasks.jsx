@@ -50,21 +50,10 @@ class Tasks extends React.Component {
     }
 
     //添加
-    create(e) {
-        e.preventDefault();
-        const oCreate = document.getElementById('create');
-        const oMake = document.getElementById('make');
-        clearInterval(oCreate.timer);
-        oCreate.timer = setInterval(function () {
-            if (oCreate.offsetTop == 150) {
-                clearInterval(oCreate.timer);
-            } else {
-                var iSpeed = (150 - oCreate.offsetTop) / 6;
-                iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
-                oCreate.style.top = oCreate.offsetTop + iSpeed + 'px';
-                oMake.style.display = 'block';
-            }
-        }, 100)
+    create() {
+        $(".create").animate({top: '150px',opacity: '1'},"slow");
+        $(".make").css("display","block");
+        
     }
 
     render() {

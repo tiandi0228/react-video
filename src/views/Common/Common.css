@@ -29,6 +29,13 @@ nav li{
     width: 60px;
     text-align: center;
 }
+nav .active{
+    widows: 60px;
+    height: 40px;
+    background: #fa7d3c;
+    display: block;
+    color: #fff;
+}
 .notice,.price,.recharge {
     width: 100%;
     border-radius: 3px;

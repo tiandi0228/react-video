@@ -12,8 +12,8 @@ class Nav extends React.Component {
             <nav className="fl">
                 <ul>
                     <li><Link to="/">主页</Link></li>
-                    <li><Link to="/tasks">任务</Link></li>
-                    <li><Link to="/user">用户</Link></li>
+                    <li><Link to="/tasks" activeClassName="active">任务</Link></li>
+                    <li><Link to="/user" activeClassName="active">用户</Link></li>
                 </ul>
             </nav>
         )

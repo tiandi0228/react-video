@@ -13,7 +13,7 @@ class Create extends React.Component {
         this.state = {
             prices: '1.00 元',
             money: '',
-            amounts: '0',
+            amounts: '',
             username: cookie.load('username'),
         };
 
@@ -37,31 +37,35 @@ class Create extends React.Component {
         const num = this.refs.num.value;
         const price = this.refs.price.value;
         const n = num * price;
+        const amount = this.state.money - n.toFixed(2);
         if (price != '0') {
             this.setState({ prices: n.toFixed(2) + ' 元' });
         }
         if (n > parseFloat(this.state.money)) {
             this.setState({ prices: '余额不足！' });
+        } else {
+            this.setState({ amounts: amount });
         }
     }
 
     // 关闭窗口
     close() {
-        const oCreate = document.getElementById('create');
-        const oMake = document.getElementById('make');
-        clearInterval(oCreate.timer);
-        oCreate.timer = setInterval(function () {
-            if (oCreate.offsetTop == -300) {
-                clearInterval(oCreate.timer);
-            } else {
-                var iSpeed = (-300 - oCreate.offsetTop) / 6;
-                iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
-                oCreate.style.top = oCreate.offsetTop + iSpeed + 'px';
-                oMake.style.display = 'none';
-            }
-        }, 100)
+        $(".create").animate({top: '-300px',opacity: '1'},"slow");
+        $(".make").css("display","none");
     }
-
+    
+    // 验证是否默认金额
+    handleChangeSelect(e){
+        e.preventDefault();
+        const price = this.refs.price.value;
+        const num = this.refs.num.value;
+        const n = num * price;
+        const amount = this.state.money - n.toFixed(2);
+        if (price != "0") {
+            this.setState({ amounts: amount});
+        }
+    }
+    
     // 验证
     handleSubmit(e) {
         e.preventDefault();
@@ -77,13 +81,17 @@ class Create extends React.Component {
         }
         const n = post['num'] * post['price'];
         const amount = this.state.money - n.toFixed(2);
-        var flag = false;
+        console.log(amount);
+        console.log(this.state.amounts);
+        let flag = false;
+        let flag1 = false;
+        let flag2 = false;
+        let flag3 = false;
 
         // 判断选择项目
         if (post['price'] === "0") {
             price.nextSibling.innerHTML = '请选择项目';
             price.nextSibling.style.color = 'red';
-            flag = false;
         } else {
             price.nextSibling.innerHTML = '';
             price.nextSibling.style.color = '';
@@ -92,57 +100,50 @@ class Create extends React.Component {
 
         if (post['price'] != "0") {
             this.setState({ prices: n.toFixed(2) + ' 元' });
-            flag = true;
         }
 
-        if (n > this.state.money) {
+        if (n > parseFloat(this.state.money)) {
             this.setState({ prices: '余额不足！' });
-            flag = false;
         } else {
             this.setState({ amounts: amount });
-            //flag = true;
+            flag1 = true;
         }
 
         // 判断视频地址
         if (!isUrl.test(post['url'])) {
             url.nextSibling.innerHTML = '请输入视频地址';
             url.nextSibling.style.color = 'red';
-            flag = false;
         } else {
             url.nextSibling.innerHTML = '';
             url.nextSibling.style.color = '';
-            flag = true;
+            flag2 = true;
         }
 
         // 判断数量
         if (!isNumber.test(post['num'])) {
             num.nextSibling.innerHTML = '请输入整数';
             num.nextSibling.style.color = 'red';
-            flag = false;
         } else if (post['num'] < 10000) {
             num.nextSibling.innerHTML = '最小数量是10000';
             num.nextSibling.style.color = 'red';
-            flag = false;
         } else if (post['num'] > 10000000) {
             num.nextSibling.innerHTML = '最大数量是10000000';
             num.nextSibling.style.color = 'red';
-            flag = false;
         } else {
             num.nextSibling.innerHTML = '';
             num.nextSibling.style.color = '';
-            flag = true;
+            flag3 = true;
         }
-        
-        console.log(flag);
-        if (flag === true) {
+
+        if (flag && flag1 && flag2 && flag3) {
             // AJAX
             $.ajax({
                 url: 'http://www.api.com/createTask',
                 type: 'POST',
                 data: { url: post['url'], target: post['num'], username: this.state.username, money: this.state.amounts },
                 success: function () {
-                    $('#create').fadeOut("slow");
-                    $('#make').fadeOut("slow");
+                    $(".create").animate({top: '-300px',opacity: '1'},"slow");
+                    $(".make").css("display","none");
                 }
             });
         };
@@ -163,7 +164,7 @@ class Create extends React.Component {
                         <form name="form" id="form" onSubmit={this.handleSubmit.bind(this) }>
                             <div className="ipt">
                                 <label className="label-name">选择项目：</label>
-                                <select defaultValue="0" ref="price">
+                                <select defaultValue="0" ref="price" onChange={this.handleChangeSelect.bind(this) }>
                                     <option value="0">请选择项目</option>
                                     <option value="0.0001">优酷刷访问数[带指数]1元/1万</option>
                                 </select>

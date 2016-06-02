@@ -36,8 +36,6 @@ class Header extends React.Component {
                 });
             }.bind(this)
         });
-
-
     }
 
     // 用户注销
