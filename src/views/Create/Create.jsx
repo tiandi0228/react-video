@@ -7,8 +7,8 @@ import cookie from 'react-cookie';
 // 创建任务
 class Create extends React.Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             prices: '1.00 元',
@@ -53,7 +53,7 @@ class Create extends React.Component {
         $(".create").animate({top: '-300px',opacity: '1'},"slow");
         $(".make").css("display","none");
     }
-    
+
     // 验证是否默认金额
     handleChangeSelect(e){
         e.preventDefault();
@@ -65,7 +65,7 @@ class Create extends React.Component {
             this.setState({ amounts: amount});
         }
     }
-    
+
     // 验证
     handleSubmit(e) {
         e.preventDefault();

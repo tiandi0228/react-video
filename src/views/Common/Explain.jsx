@@ -6,8 +6,8 @@ import request from 'superagent';
 // 说明
 class Explain extends React.Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         // 初始
         this.state = {

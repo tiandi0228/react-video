@@ -6,14 +6,14 @@ import request from 'superagent';
 // 价格
 class Price extends React.Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         // 初始
         this.state = {
             data: []
         };
-        
+
         // AJAX
         request
             .get('video.json')

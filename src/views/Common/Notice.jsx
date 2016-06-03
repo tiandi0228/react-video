@@ -5,15 +5,15 @@ import request from 'superagent';
 
 // 公告
 class Notice extends React.Component {
-   
-    constructor() {
-        super();
-        
+
+    constructor(props) {
+        super(props);
+
         // 初始
         this.state = {
             data: []
         };
-        
+
         // AJAX
         request
             .get('video.json')

@@ -11,8 +11,8 @@ import $ from 'jquery';
 class Header extends React.Component {
 
     // 初始
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             name: '',
@@ -20,7 +20,7 @@ class Header extends React.Component {
             username: cookie.load('username'),
 
         };
-        
+
         const username = this.state.username;
 
         // 获取用户信息

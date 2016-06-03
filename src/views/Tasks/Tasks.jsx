@@ -10,8 +10,8 @@ import Create from './../Create/Create.jsx';
 // 任务
 class Tasks extends React.Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         // 初始
         this.state = {
@@ -53,7 +53,7 @@ class Tasks extends React.Component {
     create() {
         $(".create").animate({top: '150px',opacity: '1'},"slow");
         $(".make").css("display","block");
-        
+
     }
 
     render() {

@@ -7,8 +7,8 @@ import $ from 'jquery';
 
 class Login extends React.Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     // 背景图替换
     this.timer = setInterval(function () {
