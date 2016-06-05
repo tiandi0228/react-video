@@ -6,7 +6,7 @@ import Footer from './../Common/Footer.jsx';
 
 // 用户列表
 class Users extends React.Component {
-    
+
     render() {
         const styles = require('./User.css');
         return (

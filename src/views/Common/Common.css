@@ -30,7 +30,7 @@ nav li{
     text-align: center;
 }
 nav .active{
-    widows: 60px;
+    width: 60px;
     height: 40px;
     background: #fa7d3c;
     display: block;

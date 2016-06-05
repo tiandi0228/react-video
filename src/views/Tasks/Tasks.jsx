@@ -23,11 +23,11 @@ class Tasks extends React.Component {
 
         // 获取列表
         $.ajax({
-            url: 'http://www.api.com/task',
+            url: 'http://www.api.com:8888/Index/Task',
             type: 'POST',
             data: { username: username },
             success: function (result) {
-                this.setState({ data: result });
+                this.setState({ data: result['data'] });
             }.bind(this)
         });
     }
@@ -38,8 +38,8 @@ class Tasks extends React.Component {
         if (r === true) {
             const delIndex = e.target.getAttribute('data-key');
             $.ajax({
-                url: 'http://www.api.com/delTask',
-                type: 'POST',
+                url: 'http://www.api.com:8888/Index/Task/Del',
+                type: 'DELETE',
                 dataType: 'text',
                 data: { id: delIndex },
                 success: function (result) {
@@ -68,7 +68,6 @@ class Tasks extends React.Component {
                     <li>{item.brush}</li>
                     <li>{item.status}</li>
                     <li>{item.time}</li>
-                    <li><a onClick={this.handleDel} data-key={item.id}>[删除]</a></li>
                 </ul>
             );
         }.bind(this));
@@ -89,7 +88,6 @@ class Tasks extends React.Component {
                             <li>已刷数量</li>
                             <li>状态</li>
                             <li>创建于</li>
-                            <li>操作</li>
                         </ol>
                         {tasksItems}
                     </div>

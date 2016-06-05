@@ -64,3 +64,15 @@ table {
 .mt20 {
     margin-top: 20px;
 }
+.error{
+    position: absolute;
+    padding: 0 10px;
+    height: 30px;
+    line-height: 30px;
+    background: #ff0000;
+    left: 70px;
+    top: -30px;
+    color: #fff;
+    border-radius: 5px;
+    display: none;
+}

@@ -11,7 +11,7 @@
 .tasks .tit span{
     width: 100px;
     height: 30px;
-    background: #428bca;
+    background: #fa7d3c;
     display: block;
     text-align: center;
     line-height: 30px;
@@ -29,7 +29,7 @@
 }
 .list ol li{
     float: left;
-    width: 12.5%;
+    width: 14.28%;
     text-align: center;
     font-size: 14px;
     line-height: 30px;
@@ -42,7 +42,7 @@
 }
 .list ul li{
     float: left;
-    width: 12.5%;
+    width: 14.28%;
     text-align: center;
     line-height: 30px;
     font-size: 14px;

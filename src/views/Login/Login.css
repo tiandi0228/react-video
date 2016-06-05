@@ -43,6 +43,7 @@
   padding: 10px 0 0 0;
 }
 .login .list-box{
+  position: relative;
   overflow: hidden;
 }
 .login .list-box .label{
@@ -91,4 +92,9 @@
   margin-right: 30px;
   font-size: 1.4rem;
   font-weight: 700;
+}
+.error{
+  left: 45px;
+  top: 10px;
+  z-index: 3;
 }

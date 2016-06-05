@@ -2,13 +2,14 @@
 
 import React from 'react';
 import { render } from 'react-dom';
-import { Router, Route, Link, IndexRoute, browserHistory } from 'react-router';
+import { Router, Route, Link, IndexRoute, createHashHistory } from 'react-router';
 import Home from './views/Home/Home.jsx';
 import Login from './views/Login/Login.jsx';
 import Register from './views/Register/Register.jsx';
 import Tasks from './views/Tasks/Tasks.jsx';
 import Users from './views/Users/Users.jsx';
 import User from './views/Users/User.jsx';
+import PageNotFound from './views/PageNotFound/PageNotFound.jsx'
 
 class Main extends React.Component {
   render() {
@@ -23,15 +24,16 @@ class Main extends React.Component {
 
 // 配置路由
 render((
-  <Router history={browserHistory}>
+  <Router history={createHashHistory}>
     <Route path="/" component={Main}>
       <IndexRoute component={Home} />
       <Route path="login" component={Login} />
       <Route path="register" component={Register} />
       <Route path="tasks" component={Tasks} />
       <Route path="user" component={Users}>
-        <Route path="/user/:userId" component={User}/>
+        <Route path="user/:userId" component={User} />
       </Route>
     </Route>
+    <Route path="*" component={PageNotFound} />
   </Router>
 ), document.getElementById('app'), function () { console.log('渲染成功！') });

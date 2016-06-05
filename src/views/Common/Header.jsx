@@ -18,18 +18,15 @@ class Header extends React.Component {
             name: '',
             money: '',
             username: cookie.load('username'),
-
         };
-
-        const username = this.state.username;
 
         // 获取用户信息
         $.ajax({
-            url: 'http://www.api.com/user',
+            url: 'http://www.api.com:8888/Index/User',
             type: 'POST',
-            data: { username: username },
+            data: { username: this.state.username },
             success: function (result) {
-                const user = result[0];
+                const user = result['data'][0];
                 this.setState({
                     name: user.username,
                     money: user.money
@@ -41,6 +38,7 @@ class Header extends React.Component {
     // 用户注销
     logout() {
         cookie.remove('username', { path: '/' });
+        window.location.replace("/Login");
     }
 
     render() {

@@ -40,8 +40,8 @@
 .ipt {
     margin-bottom: 10px;
     display: block;
-    overflow: hidden;
     font-size: 1.4rem;
+    position: relative;
 }
 .ipt input,.ipt select{
     height: 34px;
@@ -54,8 +54,17 @@
     height: 38px;
     width: 250px;
 }
-.ipt span{
-    padding: 0 0 0 10px;
+.error{
+    position: absolute;
+    padding: 0 10px;
+    height: 30px;
+    line-height: 30px;
+    background: #ff0000;
+    left: 70px;
+    top: -30px;
+    color: #fff;
+    border-radius: 5px;
+    display: none;
 }
 .ipt .url{
     width: 360px;
@@ -71,4 +80,8 @@
 }
 .ipt .btn{
     margin-left: 70px;
+}
+.tips{
+    display: none;
+    padding: 5px 0;
 }
