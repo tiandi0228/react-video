@@ -23,20 +23,20 @@ class Login extends React.Component {
   login(e) {
     e.preventDefault();
     const post = {
-      username: this.refs.username.value,
+      email: this.refs.email.value,
       password: this.refs.password.value
     }
 
-    if (post['username'] === '' || post['password'] === ' ') {
+    if (post['email'] === '' || post['password'] === ' ') {
       $('.login-box .error').html('<span>请输入账号或密码！</span>');
       $('.login-box .error').fadeIn("slow");
     } else {
       $('.login-box .error').fadeOut("slow");
       // 获取用户信息
       $.ajax({
-        url: 'http://www.api.com:8888/Index/login',
+        url: 'http://www.api.com/Index/login',
         type: 'POST',
-        data: {username: post['username'],password: post['password']},
+        data: {email: post['email'],password: post['password']},
         success: function(result) {
           const user = result['data'];
           if (user === false) {
@@ -45,10 +45,10 @@ class Login extends React.Component {
           } else {
             // 更新用户登录信息
             $.ajax({
-              url: 'http://www.api.com:8888/Index/login',
+              url: 'http://www.api.com/Index/login',
               type: 'POST',
               data: {
-                username: post['username'],
+                email: post['email'],
                 password: post['password']
               },
               success: function(rsp) {
@@ -57,7 +57,7 @@ class Login extends React.Component {
             });
             $('.login-box .error').fadeOut("slow");
             // 保存Cookie
-            cookie.save('username', user.username, {path: '/'});
+            cookie.save('email', user.email, {path: '/'});
             window.location.replace("/");
           };
         }.bind(this)
@@ -76,8 +76,8 @@ class Login extends React.Component {
           <h2 className="name">登录</h2>
           <div className="error"></div>
           <div className="list-box">
-            <label className="label">登录名：</label>
-            <input type="text" ref="username" placeholder="请输入账号" className="txt" />
+            <label className="label">邮　箱：</label>
+            <input type="text" ref="email" placeholder="请输入邮箱" className="txt" />
           </div>
           <div className="list-box">
             <label className="label">密　码：</label>

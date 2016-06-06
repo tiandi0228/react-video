@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { render } from 'react-dom';
-import { Router, Route, Link, IndexRoute, createHashHistory } from 'react-router';
+import { Router, Route, Link, IndexRoute, hashHistory } from 'react-router';
 import Home from './views/Home/Home.jsx';
 import Login from './views/Login/Login.jsx';
 import Register from './views/Register/Register.jsx';
@@ -24,7 +24,7 @@ class Main extends React.Component {
 
 // 配置路由
 render((
-  <Router history={createHashHistory}>
+  <Router history={hashHistory}>
     <Route path="/" component={Main}>
       <IndexRoute component={Home} />
       <Route path="login" component={Login} />

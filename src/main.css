@@ -59,19 +59,34 @@ table {
     float: left;
 }
 .fr {
-    float: right;  
+    float: right;
 }
 .mt20 {
     margin-top: 20px;
 }
+.tips{
+    position: absolute;
+    left: 280px;
+    top: 28px;
+    min-width: 200px;
+    z-index: 3;
+}
 .error{
+    padding: 0 10px;
+    height: 28px;
+    position: absolute;
+    line-height: 28px;
+    background: #ff0000;
+    color: #fff;
+    border-radius: 5px;
+    display: none;
+}
+.success{
+    background: green;
     position: absolute;
     padding: 0 10px;
-    height: 30px;
-    line-height: 30px;
-    background: #ff0000;
-    left: 70px;
-    top: -30px;
+    height: 28px;
+    line-height: 28px;
     color: #fff;
     border-radius: 5px;
     display: none;

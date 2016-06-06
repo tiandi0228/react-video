@@ -6,42 +6,69 @@ import $ from 'jquery';
 
 class Register extends React.Component {
 
+    // 验证邮箱
     handleChange(e) {
         e.preventDefault();
         $.ajax({
-            url:'http://www.api.com:8888/Index/Signup',
-            type: 'POST',
-            data: { username: this.refs.username.value},
+            url:'http://www.api.com/Index/Signup',
+            type: 'GET',
+            data: { email: this.refs.email.value},
             success: function (result) {
-                if(result['code'] === 200){
-                    $('.username .success').html(result['message']);
-                    $('.username .success').fadeIn("slow");
-                    $('.username .error').fadeOut("slow");
+                const res = JSON.parse(result);
+                if(res['code'] === 200){
+                    $('.email .tips').html("<span class='success'>"+res['message']+"</span>");
+                    $('.email .tips .success').css({'display':'block'});
+                    $('.email .tips .error').css({'display':'none'});
                 }else{
-                    $('.username .error').html(result['message']);
-                    $('.username .error').fadeIn("slow");
-                    $('.username .success').fadeOut("slow");
-                    return false;
+                    $('.email .tips').html("<span class='error'>"+res['message']+"</span>");
+                    $('.email .tips .error').css({'display':'block'});
+                    $('.email .tips .success').css({'display':'none'});
                 }
             }.bind(this)
         });
+
     }
 
-    signup(e) {
+    // 提交注册
+    signUp(e) {
         e.preventDefault();
         const post = {
-          username: this.refs.username.value,
           email: this.refs.email.value,
           password: this.refs.password.value,
           confirmPassword: this.refs.confirmPassword.value
-        }
+        };
+
+        // 判断邮箱是否为空
+        if (post['email'] === ''){
+            $('.email .tips').html("<div class='error'>请输入邮箱地址!</div>");
+            $('.email .tips .error').fadeIn("slow");
+            return false;
+        };
+
+        // 判断密码是否为空
+        if (post['password'] === ''){
+            $('.password .tips').html("<div class='error'>请输入密码!</div>");
+            $('.password .tips .error').fadeIn("slow");
+            return false;
+        }else{
+            $('.password .tips .error').fadeOut("slow");
+        };
+
+        if (post['password'] !== post['confirmPassword']){
+            $('.confirmPassword .tips').html("<div class='error'>两次填写的密码不一致!</div>");
+            $('.confirmPassword .tips .error').fadeIn("slow");
+            return false;
+        }else{
+            $('.confirmPassword .tips .error').fadeOut("slow");
+        };
 
         $.ajax({
-            url:'http://www.api.com:8888/Index/Signup',
+            url:'http://www.api.com/Index/Signup',
             type: 'POST',
-            data: { username: post['username'], emai: post['email'], password: post['password']},
+            data: { email: post['email'], password: post['password']},
             success: function (result) {
                 console.log('注册成功!');
+                window.location.replace("/Login");
             }.bind(this)
         });
     }
@@ -51,29 +78,23 @@ class Register extends React.Component {
         return (
             <div className="register">
                 <h2 className="name">注册</h2>
-                <div className="list-box username">
-                    <label className="label">登录名：</label>
-                    <input type="text" ref="username" placeholder="请输入账号" className="txt" onChange={this.handleChange.bind(this)} />
-                    <div className="error"></div>
-                    <div className="success"></div>
-                </div>
-                <div className="list-box">
+                <div className="list-box email">
                     <label className="label">邮　箱：</label>
-                    <input type="text" ref="email" placeholder="请输入邮箱" className="txt" />
-                    <div className="error"></div>
-                </div>                
-                <div className="list-box">
+                    <input type="text" ref="email" placeholder="请输入邮箱" className="txt" onChange={this.handleChange.bind(this)} />
+                    <div className="tips"></div>
+                </div>
+                <div className="list-box password">
                     <label className="label">密　码：</label>
                     <input type="password" ref="password" placeholder="请输入密码" className="txt" />
-                    <div className="error"></div>
+                    <div className="tips"></div>
                 </div>
-                <div className="list-box">
+                <div className="list-box confirmPassword">
                     <label className="label">确认密码：</label>
                     <input type="password" ref="confirmPassword" placeholder="请输入确认密码" className="txt" />
-                    <div className="error"></div>
+                    <div className="tips"></div>
                 </div>
                 <div className="list-box">
-                    <button type="submit" className="btn" ref='submit' onClick={this.signup.bind(this)}>注 册</button>
+                    <button type="submit" className="btn" ref='submit' onClick={this.signUp.bind(this)}>注 册</button>
                 </div>
                 <div className="foot">
                     <Link to="/login">已有账号，直接登录</Link>

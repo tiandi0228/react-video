@@ -7,13 +7,13 @@ body{
 }
 .register {
     width: 300px;
-    height: 410px;
+    height: 330px;
     border: 1px #ccc solid;
     border-radius: 10px;
     position: fixed;
     top: 50%;
     left: 50%;
-    margin: -205px 0 0 -175px;
+    margin: -115px 0 0 -175px;
     background: #fff;
     opacity: 0.8;
 }
@@ -24,7 +24,6 @@ body{
 }
 .register .list-box{
   position: relative;
-  overflow: hidden;
 }
 .register .list-box .label{
   font-size: 1.4rem;
@@ -58,26 +57,8 @@ body{
 }
 .register .foot a{
   float:right;
-  color: #000; 
+  color: #000;
   margin-right: 30px;
   font-size: 1.4rem;
   font-weight: 700;
-}
-.error{
-  left: 70px;
-  top: 10px;
-  z-index: 3;
-}
-.success{
-  left: 70px;
-  top: 10px;
-  z-index: 3;
-  background: green;
-  position: absolute;
-    padding: 0 10px;
-    height: 30px;
-    line-height: 30px;
-    color: #fff;
-    border-radius: 5px;
-    display: none;
 }

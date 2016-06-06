@@ -14,18 +14,18 @@ class Create extends React.Component {
             prices: '1.00 元',
             money: '',
             amounts: '',
-            username: cookie.load('username'),
+            email: cookie.load('email'),
         };
 
         // 获取金额
         $.ajax({
-            url: 'http://www.api.com:8888/Index/User',
-            type: 'POST',
-            data: { username: this.state.username },
+            url: 'http://www.api.com/Index/User',
+            type: 'GET',
+            data: { email: this.state.email },
             success: function (result) {
-                const user = result['data'][0];
+                const user = result['data'];
                 this.setState({
-                    name: user.username,
+                    name: user.email,
                     money: user.money
                 });
             }.bind(this)
@@ -122,7 +122,7 @@ class Create extends React.Component {
         // 判断视频地址
         if (!isUrl.test(post['url'])) {
             $('.url .error').fadeIn("slow");
-            $('.url .error').html('<span>请输入正确的视频地址</span>')
+            $('.url .error').html("<div class='error'>请输入正确的视频地址</div>")
         } else {
             $('.url .error').fadeOut("slow");
             flag2 = true;
@@ -131,13 +131,13 @@ class Create extends React.Component {
         // 判断数量
         if (!isNumber.test(post['num'])) {
             $('.num .error').fadeIn("slow");
-            $('.num .error').html('<span>请输入购买数量</span>')
+            $('.num .error').html("<div class='error'>请输入购买数量</div>")
         } else if (post['num'] < 10000) {
             $('.num .error').fadeIn("slow");
-            $('.num .error').html('<span>最小数量是10000</span>')
+            $('.num .error').html("<div class='error'>最小数量是10000</div>")
         } else if (post['num'] > 10000000) {
             $('.num .error').fadeIn("slow");
-            $('.num .error').html('<span>最大数量是10000000</span>')
+            $('.num .error').html("<div class='error'>最大数量是10000000</div>")
         } else {
             $('.num .error').fadeOut("slow");
             flag3 = true;
@@ -146,9 +146,9 @@ class Create extends React.Component {
         if (flag && flag1 && flag2 && flag3) {
             // AJAX
             $.ajax({
-                url: 'http://www.api.com:8888/Index/Task/Create',
+                url: 'http://www.api.com/Index/Task/Create',
                 type: 'POST',
-                data: { url: post['url'], target: post['num'], username: this.state.username, money: this.state.amounts },
+                data: { url: post['url'], target: post['num'], email: this.state.email, money: this.state.amounts },
                 success: function () {
                     $(".create").animate({top: '-300px',opacity: '1'},"slow");
                     $(".make").css("display","none");

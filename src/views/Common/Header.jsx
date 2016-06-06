@@ -15,20 +15,19 @@ class Header extends React.Component {
         super(props);
 
         this.state = {
-            name: '',
-            money: '',
-            username: cookie.load('username'),
+            email: cookie.load('email'),
+            money: ''
         };
 
         // 获取用户信息
         $.ajax({
-            url: 'http://www.api.com:8888/Index/User',
-            type: 'POST',
-            data: { username: this.state.username },
+            url: 'http://www.api.com/Index/User',
+            type: 'GET',
+            data: { email: this.state.email },
             success: function (result) {
                 const user = result['data'][0];
                 this.setState({
-                    name: user.username,
+                    email: user.email,
                     money: user.money
                 });
             }.bind(this)
@@ -48,7 +47,7 @@ class Header extends React.Component {
                 <h2 className="fl logo">自助视频推广</h2>
                 <Nav />
                 <ul className="fr user">
-                    <li>欢迎回来，{this.state.name}</li>
+                    <li>欢迎回来，{this.state.email}</li>
                     <li><Link to="/login">个人资料</Link></li>
                     <li>金额: {this.state.money}</li>
                     <li><a onClick={this.logout}>退出</a></li>
