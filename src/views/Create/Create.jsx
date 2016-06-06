@@ -15,17 +15,16 @@ class Create extends React.Component {
             money: '',
             amounts: '',
             email: cookie.load('email'),
-        };
+        },
 
         // 获取金额
         $.ajax({
-            url: 'http://www.api.com/Index/User',
+            url: 'http://www.api.com/Index/Task/Create',
             type: 'GET',
             data: { email: this.state.email },
             success: function (result) {
-                const user = result['data'];
+                const user = result['data'][0];
                 this.setState({
-                    name: user.email,
                     money: user.money
                 });
             }.bind(this)
@@ -51,7 +50,7 @@ class Create extends React.Component {
 
     // 关闭窗口
     close() {
-        $(".create").animate({top: '-300px',opacity: '1'},"slow");
+        $(".create").animate({top: '-300px',opacity: '0'},"10000");
         $(".make").css("display","none");
     }
 
@@ -92,8 +91,6 @@ class Create extends React.Component {
         }
         const n = post['num'] * post['price'];
         const amount = this.state.money - n.toFixed(2);
-        console.log(amount);
-        console.log(this.state.amounts);
         let flag = false;
         let flag1 = false;
         let flag2 = false;
@@ -122,7 +119,7 @@ class Create extends React.Component {
         // 判断视频地址
         if (!isUrl.test(post['url'])) {
             $('.url .error').fadeIn("slow");
-            $('.url .error').html("<div class='error'>请输入正确的视频地址</div>")
+            $('.url .error').html("<span>请输入正确的视频地址</span>")
         } else {
             $('.url .error').fadeOut("slow");
             flag2 = true;
@@ -131,13 +128,13 @@ class Create extends React.Component {
         // 判断数量
         if (!isNumber.test(post['num'])) {
             $('.num .error').fadeIn("slow");
-            $('.num .error').html("<div class='error'>请输入购买数量</div>")
+            $('.num .error').html("<span>请输入购买数量</span>")
         } else if (post['num'] < 10000) {
             $('.num .error').fadeIn("slow");
-            $('.num .error').html("<div class='error'>最小数量是10000</div>")
+            $('.num .error').html("<span>最小数量是10000</span>")
         } else if (post['num'] > 10000000) {
             $('.num .error').fadeIn("slow");
-            $('.num .error').html("<div class='error'>最大数量是10000000</div>")
+            $('.num .error').html("<span>最大数量是10000000</span>")
         } else {
             $('.num .error').fadeOut("slow");
             flag3 = true;
@@ -152,7 +149,7 @@ class Create extends React.Component {
                 success: function () {
                     $(".create").animate({top: '-300px',opacity: '1'},"slow");
                     $(".make").css("display","none");
-                    location.replace(document.referrer);
+                    location.reload();
                 }
             });
         };
@@ -192,7 +189,7 @@ class Create extends React.Component {
                             </div>
                             <div className="ipt">
                                 <label className="label-name">总共价格：</label>
-                                <span style={{ color: '#ff0000' }}>{this.state.prices}</span>
+                                <span className="prices">{this.state.prices}</span>
                             </div>
                             <div className="ipt">
                                 <button type="submit" className="btn">添 加</button>

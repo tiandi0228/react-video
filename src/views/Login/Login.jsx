@@ -28,7 +28,7 @@ class Login extends React.Component {
     }
 
     if (post['email'] === '' || post['password'] === ' ') {
-      $('.login-box .error').html('<span>请输入账号或密码！</span>');
+      $('.login-box .error').html('<span>请输入邮箱或密码！</span>');
       $('.login-box .error').fadeIn("slow");
     } else {
       $('.login-box .error').fadeOut("slow");
@@ -40,7 +40,7 @@ class Login extends React.Component {
         success: function(result) {
           const user = result['data'];
           if (user === false) {
-            $('.login-box .error').html('<span>账号或密码错误，请重新输入！</span>');
+            $('.login-box .error').html('<span>邮箱或密码错误，请重新输入！</span>');
             $('.login-box .error').fadeIn("slow");
           } else {
             // 更新用户登录信息
