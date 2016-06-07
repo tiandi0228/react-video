@@ -41,7 +41,7 @@ class Users extends React.Component {
                     <li>{item.logtime}</li>
                     <li>{item.logip}</li>
                     <li>{item.group}</li>
-                    <li><Link to={`/user/${this.state.email}`}>编辑</Link></li>
+                    <li><Link to={`user/${item.email}`}>编辑</Link></li>
                 </ul>
             );
         }.bind(this));

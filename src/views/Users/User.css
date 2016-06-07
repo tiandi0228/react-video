@@ -37,3 +37,81 @@
     font-size: 14px;
     overflow: hidden;
 }
+.user-edit{
+    margin:150px auto 0 auto;
+    width: 700px;
+    height: 300px;
+    border: 1px #ccc solid;
+    background: #f1f1f1;
+    padding: 20px;
+    border-radius: 10px;
+}
+.user-edit .ipt {
+    margin-bottom: 10px;
+    display: block;
+    font-size: 1.4rem;
+    position: relative;
+    overflow: hidden;
+}
+.user-edit .ipt label{
+    float: left;
+    width: 70px;
+    line-height: 38px;
+    text-align: right;
+    margin-right: 10px;
+}
+.user-edit .ipt input{
+    float: left;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px #ccc solid;
+    color: #464646;
+    width: 228px;
+    border-radius: 5px;
+}
+.user-edit .ipt .email,.user-edit .ipt .username{
+    float: left;
+    line-height:38px;
+}
+.user-edit .ipt .prices{
+    color: #ff0000;
+    line-height:38px;
+}
+.user-edit .ipt .error{
+    float: left;
+    position: static;
+    padding: 0 10px;
+    height: 36px;
+    line-height: 36px;
+    background: #ff0000;
+    color: #fff;
+    border-radius: 5px;
+    display: none;
+    margin-left: 10px;
+}
+.user-edit .ipt .success{
+    float: left;
+    position: static;
+    padding: 0 10px;
+    height: 36px;
+    line-height: 36px;
+    margin-left: 10px;
+}
+.user-edit .ipt button{
+    width: 150px;
+    height: 40px;
+    border: 1px #ccc solid;
+    cursor: pointer;
+}
+.user-edit .ipt .btn{
+    margin-left: 80px;
+}
+.user-edit .ipt .tips{
+    float: left;
+    position:static;
+}
+.user-edit .ipt .prompt{
+    padding-left: 10px;
+    line-height: 36px;
+    color: #ff0000;
+}

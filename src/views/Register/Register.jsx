@@ -26,7 +26,6 @@ class Register extends React.Component {
                 }
             }.bind(this)
         });
-
     }
 
     // 提交注册

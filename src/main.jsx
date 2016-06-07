@@ -30,9 +30,8 @@ render((
       <Route path="login" component={Login} />
       <Route path="register" component={Register} />
       <Route path="tasks" component={Tasks} />
-      <Route path="users" component={Users}>
-        <Route path="user/:email" component={User} />
-      </Route>
+      <Route path="users" component={Users} />
+      <Route path="user/:id" component={User} />
     </Route>
     <Route path="*" component={PageNotFound} />
   </Router>

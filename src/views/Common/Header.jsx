@@ -63,7 +63,7 @@ class Header extends React.Component {
                 <Nav />
                 <ul className="fr user">
                     <li>欢迎回来，{user}</li>
-                    <li><Link to={`/user/${this.state.email}`}>个人资料</Link></li>
+                    <li><Link to={`user/${this.state.email}`}>个人资料</Link></li>
                     <li>金额: {this.state.money}</li>
                     <li><a onClick={this.logout}>退出</a></li>
                 </ul>
