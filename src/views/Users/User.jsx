@@ -30,7 +30,7 @@ class User extends React.Component {
             success: function (result) {
                 const user = result['data'][0];
                 this.setState({
-        	        id: user.id,
+        	       id: user.id,
                     email: user.email,
                     money: user.money,
                     username: user.username,
@@ -50,7 +50,6 @@ class User extends React.Component {
             data: { username: this.refs.username.value},
             success: function (result) {
                 const res = JSON.parse(result);
-                console.log(result);
                 if(res['code'] === 200){
                     $('.username .tips').html("<span class='success'>"+res['message']+"</span>");
                     $('.username .tips .success').css({'display':'block'});
@@ -67,27 +66,29 @@ class User extends React.Component {
     // 提交修改信息
     handleSubmit(e){
         e.preventDefault();
-        const username = this.refs.username;
-        console.log(username !== undefined);
-        if(username === undefined){
-             const post = {
-                password: this.refs.password.value,
-                confirmPassword: this.refs.confirmPassword.value
-            }
-        }else{
-            const post = {
-                username: username.value,
-                password: this.refs.password.value,
-                confirmPassword: this.refs.confirmPassword.value
-            }
+        let username = this.refs.username;
+        let password = this.refs.password;
+        let confirmPassword = this.refs.confirmPassword;
+        if(username !== undefined){
+            username = username.value;
+            password = password.value;
+            confirmPassword = confirmPassword.value;
+         }else{
+            username = this.state.username;
+            password = password.value;
+            confirmPassword = confirmPassword.value;
+         }
+
+        if (password.length === 0){
+            return true;
         }
 
         // 判断密码长度
-        if (post['password'].length < 6){
+        if (password.length < 6){
             $('.password .tips').html("<div class='error'>密码长度不能小于6位!</div>");
             $('.password .tips .error').fadeIn("slow");
             return false;
-        }else if(post['password'].length > 16){
+        }else if(password.length > 16){
             $('.password .tips').html("<div class='error'>密码长度不能大于16位!</div>");
             $('.password .tips .error').fadeIn("slow");
             return false;
@@ -95,20 +96,20 @@ class User extends React.Component {
             $('.password .tips .error').fadeOut("slow");
         };
 
-        if (post['password'] !== post['confirmPassword']){
+        if (password !== confirmPassword){
             $('.confirmPassword .tips').html("<div class='error'>两次填写的密码不一致!</div>");
             $('.confirmPassword .tips .error').fadeIn("slow");
             return false;
         }else{
             $('.confirmPassword .tips .error').fadeOut("slow");
         };
-
+        console.log(1111);
         $.ajax({
             url:'http://www.api.com/Index/User/Edit',
             type: 'POST',
-            data: { id: this.state.id, username: post['username'], password: post['password']},
+            data: { id: this.state.id, username: username, password: password },
             success: function (result) {
-                console.log('修改成功!');
+                alert('修改成功!');
                 location.reload();
             }.bind(this)
         });
