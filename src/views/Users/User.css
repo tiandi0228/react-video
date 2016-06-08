@@ -8,6 +8,17 @@
 .users .tit h2{
     font-size: 2rem;
 }
+.users .tit span{
+    width: 100px;
+    height: 30px;
+    background: #fa7d3c;
+    display: block;
+    text-align: center;
+    line-height: 30px;
+    font-size: 1.6rem;
+    color: #fff;
+    cursor: pointer;
+}
 .users .list {
     margin-top: 20px;
     overflow: hidden;
@@ -40,7 +51,7 @@
 .user-edit{
     margin:150px auto 0 auto;
     width: 700px;
-    height: 300px;
+    height: 330px;
     border: 1px #ccc solid;
     background: #f1f1f1;
     padding: 20px;
@@ -60,7 +71,7 @@
     text-align: right;
     margin-right: 10px;
 }
-.user-edit .ipt input{
+.user-edit .ipt input,.user-edit .ipt select{
     float: left;
     height: 34px;
     padding: 0 10px;
@@ -69,7 +80,11 @@
     width: 228px;
     border-radius: 5px;
 }
-.user-edit .ipt .email,.user-edit .ipt .username{
+.user-edit .ipt select {
+    height: 36px;
+    width: 250px;
+}
+.user-edit .ipt .email,.user-edit .ipt .username,.user-edit .ipt .group{
     float: left;
     line-height:38px;
 }

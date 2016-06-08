@@ -14,13 +14,29 @@ class User extends React.Component {
 
         // 初始
         this.state = {
-        	id:' ',
+            id:' ',
             email: '',
             moeny: '',
-            username: ''
+            username: '',
+            group:'',
+            groups: [],
+            groupId: '',
+            gid: ''
         };
 
-        var id = this.props.params.id;
+        // 登录权限
+        $.ajax({
+            url: 'http://www.api.com/Index/User',
+            type: 'GET',
+            data: { email: cookie.load('email') },
+            success: function (result) {
+                this.setState({
+                    groupId: result['data']['group_id']
+                });
+            }.bind(this)
+        });
+
+        let id = this.props.params.id;
 
         // 查询数据
         $.ajax({
@@ -28,15 +44,25 @@ class User extends React.Component {
             type: 'GET',
             data: { email: id },
             success: function (result) {
-                const user = result['data'][0];
+                const user = result['data'];
                 this.setState({
         	       id: user.id,
                     email: user.email,
                     money: user.money,
                     username: user.username,
-                    password: user.password
-
+                    password: user.password,
+                    group: user.group,
+                    gid: user.group_id
                 });
+            }.bind(this)
+        });
+
+        // 查询用户组
+        $.ajax({
+            url: 'http://www.api.com/Index/User/Group',
+            type: 'GET',
+            success: function (result) {
+                    this.setState({groups: result['data']});
             }.bind(this)
         });
     }
@@ -69,10 +95,17 @@ class User extends React.Component {
         let username = this.refs.username;
         let password = this.refs.password;
         let confirmPassword = this.refs.confirmPassword;
+        let groups = this.refs.groups.value;
+
         if(username !== undefined){
             username = username.value;
-            password = password.value;
-            confirmPassword = confirmPassword.value;
+            if (password.value.length === 0){
+                password = this.state.password;
+                confirmPassword = password;
+            }else{
+                password = password.value;
+                confirmPassword = confirmPassword.value;
+            }
          }else{
             username = this.state.username;
             password = password.value;
@@ -80,7 +113,9 @@ class User extends React.Component {
          }
 
         if (password.length === 0){
-            return true;
+            password = this.state.password;
+            confirmPassword = password;
+            groups;
         }
 
         // 判断密码长度
@@ -88,8 +123,8 @@ class User extends React.Component {
             $('.password .tips').html("<div class='error'>密码长度不能小于6位!</div>");
             $('.password .tips .error').fadeIn("slow");
             return false;
-        }else if(password.length > 16){
-            $('.password .tips').html("<div class='error'>密码长度不能大于16位!</div>");
+        }else if(password.length > 32){
+            $('.password .tips').html("<div class='error'>密码长度不能大于32位!</div>");
             $('.password .tips .error').fadeIn("slow");
             return false;
         }else{
@@ -103,11 +138,11 @@ class User extends React.Component {
         }else{
             $('.confirmPassword .tips .error').fadeOut("slow");
         };
-        console.log(1111);
+
         $.ajax({
             url:'http://www.api.com/Index/User/Edit',
             type: 'POST',
-            data: { id: this.state.id, username: username, password: password },
+            data: { id: this.state.id, username: username, password: password, group_id:groups },
             success: function (result) {
                 alert('修改成功!');
                 location.reload();
@@ -120,6 +155,16 @@ class User extends React.Component {
         const styles = require('./User.css');
         let nickname;
         let prompt;
+        let group;
+
+        // 输出用户组
+        const groups = this.state.groups.map(function (item) {
+            return (
+                <option value={item.id} key={item.id} >{item.group}</option>
+            );
+        }.bind(this));
+
+        // 判断昵称
         if(this.state.username === ''){
             nickname = <input type="text" ref="username" onChange={this.handleChange.bind(this)} />;
             prompt = <span className="prompt">只能修改一次！</span>;
@@ -127,6 +172,13 @@ class User extends React.Component {
             nickname = <span className="username">{this.state.username}</span>;
             prompt = <span></span>;
         }
+        // 判断用户组
+        if (this.state.groupId === '0'){
+            group = <select ref="groups" defaultValue={this.state.gid}>{groups}</select>;
+        }else{
+            group = <span className="group">{this.state.group}</span>;
+        }
+
         return (
             <div>
                 <Header />
@@ -150,6 +202,10 @@ class User extends React.Component {
                                 <label>确认密码：</label>
                                 <input type="password" ref="confirmPassword" />
                                 <div className="tips"></div>
+                        </div>
+                        <div className="ipt">
+                                <label>用户组：</label>
+                                {group}
                         </div>
                         <div className="ipt">
                                 <label>金额：</label>

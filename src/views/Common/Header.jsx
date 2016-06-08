@@ -18,7 +18,8 @@ class Header extends React.Component {
             id: '',
             username: '',
             email: cookie.load('email'),
-            money: ''
+            money: '',
+            group:''
         };
 
         // 获取用户信息
@@ -27,12 +28,13 @@ class Header extends React.Component {
             type: 'GET',
             data: { email: this.state.email },
             success: function (result) {
-                const user = result['data'][0];
+                const user = result['data'];
                 this.setState({
                     id: user.id,
                     username: user.username,
                     email: user.email,
-                    money: user.money
+                    money: user.money,
+                    group: user.group
                 });
             }.bind(this)
         });
@@ -62,7 +64,7 @@ class Header extends React.Component {
                 <h2 className="fl logo">自助视频推广</h2>
                 <Nav />
                 <ul className="fr user">
-                    <li>欢迎回来，{user}</li>
+                    <li>欢迎回来，{user} ({this.state.group})</li>
                     <li><Link to={`user/${this.state.email}`}>个人资料</Link></li>
                     <li>金额: {this.state.money}</li>
                     <li><a onClick={this.logout}>退出</a></li>

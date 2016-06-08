@@ -21,7 +21,7 @@ class Nav extends React.Component {
             type: 'GET',
             data: { email: this.state.email },
             success: function (result) {
-                const user = result['data'][0];
+                const user = result['data'];
                 this.setState({
                     group: user.group
                 });
@@ -32,7 +32,7 @@ class Nav extends React.Component {
     render() {
         const styles = require('./Common.css');
         let group;
-        if(this.state.group === '1'){
+        if(this.state.group === '管理员'){
             group = <li><Link to="/users" activeClassName="active">用户</Link></li>;
         }
         return (

@@ -30,6 +30,12 @@ class Users extends React.Component {
         });
     }
 
+    // 添加
+    create() {
+        $(".create").animate({top: '150px',opacity: '1'},"slow");
+        $(".make").css("display","block");
+    }
+
     render() {
         const styles = require('./User.css');
         const usersItems = this.state.data.map(function (item) {
@@ -51,6 +57,7 @@ class Users extends React.Component {
                 <div className="users">
                     <div className="tit">
                         <h2 className="fl">用户列表</h2>
+                        <span className="fr" onClick={this.create}>添加</span>
                     </div>
                     <div className="list">
                         <ol>
