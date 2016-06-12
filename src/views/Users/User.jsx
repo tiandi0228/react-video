@@ -16,7 +16,7 @@ class User extends React.Component {
         this.state = {
             id:' ',
             email: '',
-            moeny: '',
+            money: '',
             username: '',
             group:'',
             groups: [],
@@ -89,13 +89,25 @@ class User extends React.Component {
         });
     }
 
+    // 改变金额
+    handleChangeMoney(e){
+        e.preventDefault();
+        this.setState({money:this.refs.money.value});
+    }
+
+    handleChangeGroups(e){
+        e.preventDefault();
+        this.setState({gid:this.refs.groups.value});
+    }
+
     // 提交修改信息
     handleSubmit(e){
         e.preventDefault();
         let username = this.refs.username;
         let password = this.refs.password;
         let confirmPassword = this.refs.confirmPassword;
-        let groups = this.refs.groups.value;
+        let groups = this.refs.groups;
+        let money = this.refs.money;
 
         if(username !== undefined){
             username = username.value;
@@ -115,7 +127,13 @@ class User extends React.Component {
         if (password.length === 0){
             password = this.state.password;
             confirmPassword = password;
-            groups;
+            if(groups !== undefined || money !== undefined){
+                groups = this.state.gid.value;
+                money = this.state.money.value;
+            }else{
+                groups = this.state.gid;
+                money = this.state.money;
+            }
         }
 
         // 判断密码长度
@@ -142,10 +160,11 @@ class User extends React.Component {
         $.ajax({
             url:'http://www.api.com/Index/User/Edit',
             type: 'POST',
-            data: { id: this.state.id, username: username, password: password, group_id:groups },
+            data: { id: this.state.id, username: username, password: password, group_id: groups, money: money },
             success: function (result) {
+                console.log(result);
                 alert('修改成功!');
-                location.reload();
+                //location.reload();
             }.bind(this)
         });
         
@@ -156,6 +175,7 @@ class User extends React.Component {
         let nickname;
         let prompt;
         let group;
+        let gold;
 
         // 输出用户组
         const groups = this.state.groups.map(function (item) {
@@ -174,9 +194,15 @@ class User extends React.Component {
         }
         // 判断用户组
         if (this.state.groupId === '0'){
-            group = <select ref="groups" defaultValue={this.state.gid}>{groups}</select>;
+            group = <select ref="groups" value={this.state.gid} onChange={this.handleChangeGroups.bind(this)}>{groups}</select>;
         }else{
             group = <span className="group">{this.state.group}</span>;
+        }
+        // 判断金额
+        if(this.state.groupId === '0'){
+            gold = <input type="text" ref="money" value={this.state.money} onChange={this.handleChangeMoney.bind(this)} />;
+        }else{
+            gold = <span className="prices">{this.state.money}</span>;
         }
 
         return (
@@ -209,7 +235,7 @@ class User extends React.Component {
                         </div>
                         <div className="ipt">
                                 <label>金额：</label>
-                                <span className="prices">{this.state.money}</span>
+                                {gold}
                         </div>
                         <div className="ipt">
                                 <button type="submit" className="btn">修 改</button>
