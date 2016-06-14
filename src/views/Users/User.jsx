@@ -128,8 +128,8 @@ class User extends React.Component {
             password = this.state.password;
             confirmPassword = password;
             if(groups !== undefined || money !== undefined){
-                groups = this.state.gid.value;
-                money = this.state.money.value;
+                groups = groups.value;
+                money = money.value;
             }else{
                 groups = this.state.gid;
                 money = this.state.money;
@@ -162,9 +162,8 @@ class User extends React.Component {
             type: 'POST',
             data: { id: this.state.id, username: username, password: password, group_id: groups, money: money },
             success: function (result) {
-                console.log(result);
                 alert('修改成功!');
-                //location.reload();
+                location.reload();
             }.bind(this)
         });
         

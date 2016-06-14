@@ -10,10 +10,11 @@ import $ from 'jquery';
 // 头部
 class Header extends React.Component {
 
-    // 初始
+    
     constructor(props) {
         super(props);
 
+        // 初始
         this.state = {
             id: '',
             username: '',

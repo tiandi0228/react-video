@@ -7,8 +7,8 @@ import $ from 'jquery';
 import Header from './../Common/Header.jsx';
 import Footer from './../Common/Footer.jsx';
 
-// 用户列表
-class Users extends React.Component {
+// 消费记录
+class Pay extends React.Component {
 
     constructor(props) {
         super(props);
@@ -50,41 +50,30 @@ class Users extends React.Component {
     }
 
     render() {
-        const styles = require('./User.css');
-        // 判断权限
-        if (this.state.group !== '管理员') {
-            window.location.replace("/");
-        }
+        const styles = require('./Pay.css');
         const usersItems = this.state.data.map(function (item) {
             return (
                 <ul key={item.id} id={item.id}>
-                    <li>{item.id}</li>
-                    <li>{item.username}</li>
+                    <li>{item.logtime}</li>
                     <li>{item.email}</li>
                     <li>{item.logtime}</li>
-                    <li>{item.logip}</li>
-                    <li>{item.group}</li>
-                    <li><Link to={`user/${item.email}`}>编辑</Link></li>
+                    <li>{item.logtime}</li>
                 </ul>
             );
         }.bind(this));
         return (
             <div>
                 <Header />
-                <div className="users">
+                <div className="pay">
                     <div className="tit">
-                        <h2 className="fl">用户列表</h2>
-                        <span className="fr" onClick={this.create}>添加</span>
+                        <h2 className="fl">消费记录</h2>
                     </div>
                     <div className="list">
                         <ol>
-                            <li>编号</li>
-                            <li>昵称</li>
-                            <li>邮箱</li>
-                            <li>登录时间</li>
-                            <li>登录ip</li>
-                            <li>用户组</li>
-                            <li>操作</li>
+                            <li>消费日期</li>
+                            <li>标题</li>
+                            <li>金额</li>
+                            <li>状态</li>
                         </ol>
                         {usersItems}
                     </div>
@@ -95,4 +84,4 @@ class Users extends React.Component {
     }
 }
 
-export default Users;
+export default Pay;

@@ -15,6 +15,7 @@ class Create extends React.Component {
             money: '',
             amounts: '',
             email: cookie.load('email'),
+            preferential: ''
         },
 
         // 获取金额
@@ -25,7 +26,8 @@ class Create extends React.Component {
             success: function (result) {
                 const user = result['data'][0];
                 this.setState({
-                    money: user.money
+                    money: user.money,
+                    preferential: user.preferential
                 });
             }.bind(this)
         });
@@ -36,7 +38,7 @@ class Create extends React.Component {
         e.preventDefault();
         const num = this.refs.num.value;
         const price = this.refs.price.value;
-        const n = num * price;
+        const n = num * price * this.state.preferential;
         const amount = this.state.money - n.toFixed(2);
         if (price != '0') {
             this.setState({ prices: n.toFixed(2) + ' 元' });
@@ -59,7 +61,7 @@ class Create extends React.Component {
         e.preventDefault();
         const price = this.refs.price.value;
         const num = this.refs.num.value;
-        const n = num * price;
+        const n = num * price * this.state.preferential;
         const amount = this.state.money - n.toFixed(2);
         if (price != "0") {
             this.setState({ amounts: amount});
@@ -89,7 +91,7 @@ class Create extends React.Component {
             url: url.value,
             num: num.value
         }
-        const n = post['num'] * post['price'];
+        const n = post['num'] * post['price'] * this.state.preferential;
         const amount = this.state.money - n.toFixed(2);
         let flag = false;
         let flag1 = false;

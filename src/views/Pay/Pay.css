@@ -1,0 +1,20 @@
+.pay{
+    margin:20px 30px;
+}
+.pay .tit{
+    height: 30px;
+    overflow: hidden;
+}
+.pay .tit h2{
+    font-size: 2rem;
+}
+.pay ol,.pay ul{
+	border-bottom: 1px #ccc solid;
+	height: 30px;
+	line-height: 30px;
+}
+.pay li{
+	float: left;
+	width: 25%;
+	text-align: center;
+}

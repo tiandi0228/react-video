@@ -57,7 +57,13 @@ class Tasks extends React.Component {
 
     render() {
         const styles = require('./Tasks.css');
+        let status;
         const tasksItems = this.state.data.map(function (item) {
+            if(item.status === '运行'){
+                status = <span style={{color:'red'}}>运行</span>;
+            }else{
+                status = <span style={{color:'#00ff00'}}>完成</span>;
+            }
             return (
                 <ul key={item.id} id={item.id}>
                     <li>{item.id}</li>
@@ -65,7 +71,7 @@ class Tasks extends React.Component {
                     <li>{item.initial}</li>
                     <li>{item.target}</li>
                     <li>{item.brush}</li>
-                    <li>{item.status}</li>
+                    <li>{status}</li>
                     <li>{item.time}</li>
                 </ul>
             );

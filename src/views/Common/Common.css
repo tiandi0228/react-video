@@ -36,13 +36,13 @@ nav .active{
     display: block;
     color: #fff;
 }
-.notice,.price,.recharge {
+.notice,.price,.recharge,.explain {
     width: 100%;
     border-radius: 3px;
     overflow: hidden;
     background: #fff;
 }
-.notice .tit,.price .tit,.recharge .tit{
+.notice .tit,.price .tit,.recharge .tit,.explain .tit{
     height: 40px;
     background: #428bca;
     line-height: 40px;
@@ -50,14 +50,14 @@ nav .active{
     padding: 0 20px;
     color: #fff;
 }
-.notice .con,.price .con,.recharge .con {
+.notice .con,.price .con,.recharge .con,.explain .con {
     padding: 10px;
     border-width: 0 1px 1px 1px;
     border-color: #ccc;
     border-style: solid;
     overflow: hidden;
 }
-.notice .con li,.price .con li,.recharge .con li{
+.notice .con li,.price .con li,.recharge .con li,.explain .con li{
     line-height: 25px;
     font-size: 1.4rem;
     padding: 10px 0;
@@ -71,6 +71,16 @@ nav .active{
     float:left;
     width: 33%;
     border-bottom: none;
+}
+.explain .con ul{
+    float: left;
+    width: 50%;
+    border-bottom: 1px #ccc dashed;
+}
+.explain .con li{
+    float: left;
+    width: 50%;
+    border-bottom: none; 
 }
 footer{
     height: 30px;

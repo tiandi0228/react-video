@@ -3,7 +3,7 @@
 import React from 'react';
 import request from 'superagent';
 
-// 说明
+// 等级和折扣
 class Explain extends React.Component {
 
     constructor(props) {
@@ -27,16 +27,17 @@ class Explain extends React.Component {
         const styles = require('./Common.css');
         const explainItems = this.state.data.map(function (item) {
             return (
-                <li key={item.id}>{item.content}</li>
+                <ul key={item.id}>
+                    <li>{item.level}</li>
+                    <li>{item.discount}</li>
+                </ul>
             );
         });
         return (
-            <div className="recharge mt20">
-                <div className="tit">说明</div>
+            <div className="explain mt20">
+                <div className="tit">等级和折扣</div>
                 <div className="con">
-                    <ul>
-                        {explainItems}
-                    </ul>
+                    {explainItems}
                 </div>
             </div>
         )
