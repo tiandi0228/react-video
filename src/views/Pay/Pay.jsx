@@ -15,28 +15,16 @@ class Pay extends React.Component {
 
         // 初始
         this.state = {
-            data: [],
-            email: cookie.load('email'),
-            group:''
+            data: []
         };
 
-        // 获取用户信息
-        $.ajax({
-            url: 'http://www.api.com/Index/User',
-            type: 'GET',
-            data: { email: this.state.email },
-            success: function (result) {
-                const user = result['data'];
-                this.setState({
-                    group: user.group
-                });
-            }.bind(this)
-        });
+        const email = cookie.load('email');
 
         // 获取列表
         $.ajax({
-            url: 'http://www.api.com/Index/User/UserList',
+            url: 'http://www.api.com/Index/Pay',
             type: 'GET',
+            data: { email: email },
             success: function (result) {
                 this.setState({ data: result['data'] });
             }.bind(this)
@@ -51,13 +39,13 @@ class Pay extends React.Component {
 
     render() {
         const styles = require('./Pay.css');
-        const usersItems = this.state.data.map(function (item) {
+        const payItems = this.state.data.map(function (item) {
             return (
                 <ul key={item.id} id={item.id}>
-                    <li>{item.logtime}</li>
-                    <li>{item.email}</li>
-                    <li>{item.logtime}</li>
-                    <li>{item.logtime}</li>
+                    <li>{item.time}</li>
+                    <li>{item.content}</li>
+                    <li>{item.money}</li>
+                    <li>{item.status}</li>
                 </ul>
             );
         }.bind(this));
@@ -71,11 +59,11 @@ class Pay extends React.Component {
                     <div className="list">
                         <ol>
                             <li>消费日期</li>
-                            <li>标题</li>
+                            <li>内容</li>
                             <li>金额</li>
                             <li>状态</li>
                         </ol>
-                        {usersItems}
+                        {payItems}
                     </div>
                 </div>
                 <Footer />

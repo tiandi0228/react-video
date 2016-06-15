@@ -143,7 +143,7 @@ class Create extends React.Component {
         }
 
         if (flag && flag1 && flag2 && flag3) {
-            // AJAX
+            // 创建任务
             $.ajax({
                 url: 'http://www.api.com/Index/Task/Create',
                 type: 'POST',
@@ -154,6 +154,17 @@ class Create extends React.Component {
                     location.reload();
                 }
             });
+
+            // 提交消费记录
+            $.ajax({
+                url: 'http://www.api.com/Index/Pay',
+                type: 'POST',
+                data: { num: post['num'], email: this.state.email, money: n },
+                success: function () {
+                   console.log('成功');
+                }
+            });
+
         };
 
     }

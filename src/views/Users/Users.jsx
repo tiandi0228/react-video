@@ -16,8 +16,7 @@ class Users extends React.Component {
         // 初始
         this.state = {
             data: [],
-            email: cookie.load('email'),
-            groupId: ''
+            email: cookie.load('email')
         };
 
         // 登录权限
@@ -26,9 +25,11 @@ class Users extends React.Component {
             type: 'GET',
             data: { email: cookie.load('email') },
             success: function (result) {
-                this.setState({
-                    groupId: result['data']['group_id']
-                });
+                 // 判断用户是否为管理员
+                if (result['data']['group_id'] !== '1'){
+                    window.location.replace("/");
+                    return false;
+                }
             }.bind(this)
         });
 
@@ -51,12 +52,6 @@ class Users extends React.Component {
 
     render() {
         const styles = require('./User.css');
-
-        // 判断用户是否为管理员
-        if (this.state.groupId !== 1){
-            window.location.replace("/");
-            return false;
-        }
 
         const usersItems = this.state.data.map(function (item) {
             return (
