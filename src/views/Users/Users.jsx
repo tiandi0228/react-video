@@ -17,18 +17,17 @@ class Users extends React.Component {
         this.state = {
             data: [],
             email: cookie.load('email'),
-            group:''
+            groupId: ''
         };
 
-        // 获取用户信息
+        // 登录权限
         $.ajax({
             url: 'http://www.api.com/Index/User',
             type: 'GET',
-            data: { email: this.state.email },
+            data: { email: cookie.load('email') },
             success: function (result) {
-                const user = result['data'];
                 this.setState({
-                    group: user.group
+                    groupId: result['data']['group_id']
                 });
             }.bind(this)
         });
@@ -41,6 +40,7 @@ class Users extends React.Component {
                 this.setState({ data: result['data'] });
             }.bind(this)
         });
+
     }
 
     // 添加
@@ -51,10 +51,13 @@ class Users extends React.Component {
 
     render() {
         const styles = require('./User.css');
-        // 判断权限
-        if (this.state.group !== '管理员') {
+
+        // 判断用户是否为管理员
+        if (this.state.groupId !== 1){
             window.location.replace("/");
+            return false;
         }
+
         const usersItems = this.state.data.map(function (item) {
             return (
                 <ul key={item.id} id={item.id}>

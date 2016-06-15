@@ -43,6 +43,7 @@ class Header extends React.Component {
         // 判断是否登录
         if (this.state.email === undefined) {
             window.location.replace("/#/Login");
+            return false;
         }
     }
 
@@ -50,6 +51,7 @@ class Header extends React.Component {
     logout() {
         cookie.remove('email', { path: '/' });
         window.location.replace("/#/Login");
+        return false;
     }
 
     render() {

@@ -41,7 +41,7 @@ class Nav extends React.Component {
                     <li><Link to="/">主页</Link></li>
                     <li><Link to="/tasks" activeClassName="active">任务</Link></li>
                     {group}
-                    <li><Link to="/pay">消费记录</Link></li>
+                    <li><Link to="/pay" activeClassName="active">消费</Link></li>
                 </ul>
             </nav>
         )

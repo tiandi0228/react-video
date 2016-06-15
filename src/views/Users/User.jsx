@@ -192,13 +192,13 @@ class User extends React.Component {
             prompt = <span></span>;
         }
         // 判断用户组
-        if (this.state.groupId === '0'){
+        if (this.state.groupId === '1'){
             group = <select ref="groups" value={this.state.gid} onChange={this.handleChangeGroups.bind(this)}>{groups}</select>;
         }else{
             group = <span className="group">{this.state.group}</span>;
         }
         // 判断金额
-        if(this.state.groupId === '0'){
+        if(this.state.groupId === '1'){
             gold = <input type="text" ref="money" value={this.state.money} onChange={this.handleChangeMoney.bind(this)} />;
         }else{
             gold = <span className="prices">{this.state.money}</span>;
