@@ -6,6 +6,7 @@ import {Link} from 'react-router';
 import $ from 'jquery';
 import Header from './../Common/Header.jsx';
 import Footer from './../Common/Footer.jsx';
+import Pay from './Pay.jsx';
 
 // 用户列表
 class Users extends React.Component {
@@ -50,6 +51,13 @@ class Users extends React.Component {
         $(".make").css("display","block");
     }
 
+    // 充值
+    pay(e) {
+        e.preventDefault();
+        $(".pay").animate({width: '300px',height: '150px',opacity: '1'},"slow");
+        cookie.save('mail', e.target.getAttribute('data'), {path: '/'});
+    }
+
     render() {
         const styles = require('./User.css');
 
@@ -62,7 +70,7 @@ class Users extends React.Component {
                     <li>{item.logtime}</li>
                     <li>{item.logip}</li>
                     <li>{item.group}</li>
-                    <li><Link to={`user/${item.email}`}>编辑</Link></li>
+                    <li><Link to={`user/${item.email}`}>编辑</Link> <a key={item.id} data={item.email} onClick={this.pay} style={{marginLeft:'10px'}}>充值</a></li>
                 </ul>
             );
         }.bind(this));
@@ -87,6 +95,7 @@ class Users extends React.Component {
                         {usersItems}
                     </div>
                 </div>
+                <Pay />
                 <Footer />
             </div>
         )

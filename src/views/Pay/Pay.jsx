@@ -39,12 +39,18 @@ class Pay extends React.Component {
 
     render() {
         const styles = require('./Pay.css');
+        let pay;
         const payItems = this.state.data.map(function (item) {
+            if(item.content === '充值'){
+                pay = <li>+{item.money}</li>;
+            }else{
+                pay = <li>-{item.money}</li>;
+            }
             return (
                 <ul key={item.id} id={item.id}>
                     <li>{item.time}</li>
                     <li>{item.content}</li>
-                    <li>{item.money}</li>
+                    {pay}
                     <li>{item.status}</li>
                 </ul>
             );

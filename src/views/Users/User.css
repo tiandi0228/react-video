@@ -130,3 +130,64 @@
     line-height: 36px;
     color: #ff0000;
 }
+.pay{
+    width: 0;
+    height: 0;
+    border: 1px #ccc solid;
+    position: fixed;
+    top:50%;
+    left: 50%;
+    margin: -150px 0 0 -75px;
+    background: #fff;
+    box-shadow: 1px 1px 1px #ccc;
+    opacity: 0;
+    padding: 20px;
+}
+.close {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    background: #fff;
+    border: 1px #ccc solid;
+    border-radius: 20px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 1.6rem;
+    cursor: pointer;
+}
+.ipt {
+    margin-bottom: 10px;
+    display: block;
+    font-size: 1.4rem;
+    position: relative;
+    overflow: hidden;
+}
+.ipt label{
+    float: left;
+    width: 70px;
+    line-height: 38px;
+}
+.ipt span{
+    color: #ff0000;
+    line-height:38px;
+}
+.ipt input{
+    float: left;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px #ccc solid;
+    color: #464646;
+    width: 150px;
+    border-radius: 5px;
+}
+.ipt button{
+    width: 150px;
+    height: 40px;
+    border: 1px #ccc solid;
+    cursor: pointer;
+}
+.ipt .btn{
+    margin-left: 70px;
+}

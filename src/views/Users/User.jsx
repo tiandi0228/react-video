@@ -165,8 +165,7 @@ class User extends React.Component {
                 alert('修改成功!');
                 location.reload();
             }.bind(this)
-        });
-        
+        });    
     }
 
     render() {
