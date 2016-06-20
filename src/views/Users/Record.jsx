@@ -1,14 +1,13 @@
 'use strict';
 
 import React from 'react';
-import cookie from 'react-cookie';
 import {Link} from 'react-router';
 import $ from 'jquery';
 import Header from './../Common/Header.jsx';
 import Footer from './../Common/Footer.jsx';
 
 // 消费记录
-class Pay extends React.Component {
+class Record extends React.Component {
 
     constructor(props) {
         super(props);
@@ -18,27 +17,21 @@ class Pay extends React.Component {
             data: []
         };
 
-        const email = cookie.load('email');
+        let id = this.props.params.id;
 
         // 获取列表
         $.ajax({
-            url: 'http://www.api.com/Index/Pay',
+            url: 'http://www.api.com/Index/User/Record',
             type: 'GET',
-            data: { email: email },
+            data: { email: id },
             success: function (result) {
                 this.setState({ data: result['data'] });
             }.bind(this)
         });
     }
 
-    // 添加
-    create() {
-        $(".create").animate({top: '150px',opacity: '1'},"slow");
-        $(".make").css("display","block");
-    }
-
     render() {
-        const styles = require('./Pay.css');
+        const styles = require('./../Pay/Pay.css');
         let pay;
         const payItems = this.state.data.map(function (item) {
             if(item.content === '充值'){
@@ -78,4 +71,4 @@ class Pay extends React.Component {
     }
 }
 
-export default Pay;
+export default Record;

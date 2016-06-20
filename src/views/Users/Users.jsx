@@ -70,7 +70,7 @@ class Users extends React.Component {
                     <li>{item.logtime}</li>
                     <li>{item.logip}</li>
                     <li>{item.group}</li>
-                    <li><Link to={`user/${item.email}`}>编辑</Link> <a key={item.id} data={item.email} onClick={this.pay} style={{marginLeft:'10px'}}>充值</a></li>
+                    <li><Link to={`user/${item.email}`}>编辑</Link> <a key={item.id} data={item.email} onClick={this.pay} style={{marginLeft:'10px'}}>充值</a> <Link to={`record/${item.email}`}>记录</Link></li>
                 </ul>
             );
         }.bind(this));

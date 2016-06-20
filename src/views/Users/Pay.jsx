@@ -45,15 +45,27 @@ class Pay extends React.Component {
     handleSubmit(e) {
             e.preventDefault();
             const money = this.refs.money.value;
-            
+            console.log(money);
             $.ajax({
-                url: 'http://www.api.com/Index/Pay',
+                url: 'http://www.api.com/Index/Task/Pay',
                 type: 'POST',
-                data: { num: post['num'], email: this.state.email, money: n },
+                data: { email: cookie.load('mail'), money: money },
                 success: function () {
                    location.reload();
                 }
             });
+
+            const m = money*1 + this.state.money*1;
+            console.log(m);
+
+            $.ajax({
+                url: 'http://www.api.com/Index/Task/User',
+                type: 'POST',
+                data: { email: cookie.load('mail'), money: m },
+                success: function () {
+                   location.reload();
+                }
+            })
 
     }
 
@@ -80,7 +92,7 @@ class Pay extends React.Component {
                             </div>
                             <div className="ipt">
                                 <label className="label-name">金额：</label>
-                                <input type="money" className="money" ref="num" />
+                                <input type="money" className="money" ref="money" />
                             </div>
                             <div className="ipt">
                                 <button type="submit" className="btn">充 值</button>

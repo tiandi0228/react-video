@@ -19,15 +19,15 @@
     color: #fff;
     cursor: pointer;
 }
-.list {
+.tasks .list {
     margin-top: 20px;
     overflow: hidden;
 }
-.list ol {
+.tasks .list ol {
     height: 30px;
     border-bottom: 1px #000 solid;
 }
-.list ol li{
+.tasks .list ol li{
     float: left;
     width: 14.28%;
     text-align: center;
@@ -35,12 +35,12 @@
     line-height: 30px;
     overflow: hidden;
 }
-.list ul{
+.tasks .list ul{
     border-bottom: 1px #000 solid;
     height: 30px;
     overflow: hidden;
 }
-.list ul li{
+.tasks .list ul li{
     float: left;
     width: 14.28%;
     text-align: center;

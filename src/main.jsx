@@ -10,6 +10,7 @@ import Tasks from './views/Tasks/Tasks.jsx';
 import Users from './views/Users/Users.jsx';
 import User from './views/Users/User.jsx';
 import Pay from './views/Pay/Pay.jsx';
+import Record from './views/Users/Record.jsx';
 import PageNotFound from './views/PageNotFound/PageNotFound.jsx'
 
 class Main extends React.Component {
@@ -33,6 +34,7 @@ render((
       <Route path="tasks" component={Tasks} />
       <Route path="users" component={Users} />
       <Route path="user/:id" component={User} />
+      <Route path="record/:id" component={Record} />
       <Route path="pay" component={Pay} />
     </Route>
     <Route path="*" component={PageNotFound} />
