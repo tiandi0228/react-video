@@ -49,13 +49,42 @@
     overflow: hidden;
 }
 .user-edit{
-    margin:100px auto 0 auto;
+    margin:60px auto 0 auto;
     width: 700px;
-    height: 330px;
+    height: 470px;
+    overflow: hidden;
+    position: relative;
+}
+.user-edit .tab{
+    height: 40px;
+    overflow: hidden;
+    position: absolute;
+    left: 20px;
+    top: 0;
+    z-index: 2;
+}
+.user-edit .tab span{
+    float: left;
+    width: 100px;
+    height: 40px;
+    border: 1px #ccc solid;
+    display: block;
+    line-height: 40px;
+    text-align: center;
+    margin-right: 5px;
+    border-radius: 5px 5px 0 0;
+}
+.user-edit .tab span.cur{
+    background: #f1f1f1;
+}
+.user-edit .edit{
     border: 1px #ccc solid;
     background: #f1f1f1;
     padding: 20px;
     border-radius: 10px;
+    position: absolute;
+    top:39px;
+    left: 0;
 }
 .user-edit .ipt {
     margin-bottom: 10px;
@@ -157,23 +186,23 @@
     font-size: 1.6rem;
     cursor: pointer;
 }
-.ipt {
+.pay .ipt {
     margin-bottom: 10px;
     display: block;
     font-size: 1.4rem;
     position: relative;
     overflow: hidden;
 }
-.ipt label{
+.pay .ipt label{
     float: left;
     width: 70px;
     line-height: 38px;
 }
-.ipt span{
+.pay .ipt span{
     color: #ff0000;
     line-height:38px;
 }
-.ipt input{
+.pay .ipt input{
     float: left;
     height: 34px;
     padding: 0 10px;
@@ -182,12 +211,12 @@
     width: 150px;
     border-radius: 5px;
 }
-.ipt button{
+.pay .ipt button{
     width: 150px;
     height: 40px;
     border: 1px #ccc solid;
     cursor: pointer;
 }
-.ipt .btn{
+.pay .ipt .btn{
     margin-left: 70px;
 }

@@ -6,6 +6,7 @@ import $ from 'jquery';
 import Header from './../Common/Header.jsx';
 import Footer from './../Common/Footer.jsx';
 import Create from './../Create/Create.jsx';
+import Page from './../Common/Page.jsx';
 
 // 任务
 class Tasks extends React.Component {
@@ -24,7 +25,7 @@ class Tasks extends React.Component {
         $.ajax({
             url: 'http://www.api.com/Index/Task',
             type: 'GET',
-            data: { email: email },
+            data: { email: email,limit: 12 },
             success: function (result) {
                 this.setState({ data: result['data'] });
             }.bind(this)
@@ -62,7 +63,7 @@ class Tasks extends React.Component {
             if(item.status === '运行'){
                 status = <span style={{color:'red'}}>运行</span>;
             }else{
-                status = <span style={{color:'#00ff00'}}>完成</span>;
+                status = <span style={{color:'rgb(62, 173, 5)'}}>完成</span>;
             }
             return (
                 <ul key={item.id} id={item.id}>
@@ -95,6 +96,7 @@ class Tasks extends React.Component {
                             <li>创建于</li>
                         </ol>
                         {tasksItems}
+                        <Page total="10" />
                     </div>
                 </div>
                 <Create />

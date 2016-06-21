@@ -207,38 +207,49 @@ class User extends React.Component {
             <div>
                 <Header />
                 <div className="user-edit">
-                    <form name="form" id="form" onSubmit={this.handleSubmit.bind(this) }>
-                    	<div className="ipt username">
-            	       <label>昵称：</label>
-                               {nickname}
-                               <div className="tips"></div>
-                    	</div>
-                        <div className="ipt">
-                                <label>邮箱：</label>
-                                <span className="email">{this.state.email}</span>
-                        </div>
-                        <div className="ipt password">
-                                <label>密码：</label>
-                                <input type="password" ref="password" />
-                                <div className="tips"></div>
-                        </div>
-                        <div className="ipt confirmPassword">
-                                <label>确认密码：</label>
-                                <input type="password" ref="confirmPassword" />
-                                <div className="tips"></div>
-                        </div>
-                        <div className="ipt">
-                                <label>用户组：</label>
-                                {group}
-                        </div>
-                        <div className="ipt">
-                                <label>金额：</label>
-                                {gold}
-                        </div>
-                        <div className="ipt">
-                                <button type="submit" className="btn">修 改</button>
-                        </div>
-                    </form>
+                    <div className="tab">
+                        <span className="cur">个人资料</span>
+                        <span>修改密码</span>
+                    </div>
+                    <div className="edit">
+                        <form name="form" id="form" onSubmit={this.handleSubmit.bind(this) }>
+                        	<div className="ipt username">
+                	       <label>昵称：</label>
+                                   {nickname}
+                                   <div className="tips"></div>
+                        	</div>
+                            <div className="ipt">
+                                    <label>邮箱：</label>
+                                    <span className="email">{this.state.email}</span>
+                            </div>
+                            <div className="ipt password">
+                                    <label>旧密码：</label>
+                                    <input type="password" ref="oldPassword" />
+                                    <div className="tips"></div>
+                            </div>
+                            <div className="ipt password">
+                                    <label>新密码：</label>
+                                    <input type="password" ref="password" />
+                                    <div className="tips"></div>
+                            </div>
+                            <div className="ipt confirmPassword">
+                                    <label>确认密码：</label>
+                                    <input type="password" ref="confirmPassword" />
+                                    <div className="tips"></div>
+                            </div>
+                            <div className="ipt">
+                                    <label>用户组：</label>
+                                    {group}
+                            </div>
+                            <div className="ipt">
+                                    <label>金额：</label>
+                                    {gold}
+                            </div>
+                            <div className="ipt">
+                                    <button type="submit" className="btn">修 改</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
                 <Footer />
             </div>

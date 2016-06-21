@@ -46,7 +46,7 @@
     "explain": [{
         "id": 1,
         "level": "普通会员",
-        "discount": "1折"
+        "discount": "无折"
     }, {
         "id": 2,
         "level": "一级会员",

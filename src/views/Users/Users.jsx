@@ -7,6 +7,7 @@ import $ from 'jquery';
 import Header from './../Common/Header.jsx';
 import Footer from './../Common/Footer.jsx';
 import Pay from './Pay.jsx';
+import PagingBar from './../Common/Page.jsx';
 
 // 用户列表
 class Users extends React.Component {
@@ -24,7 +25,7 @@ class Users extends React.Component {
         $.ajax({
             url: 'http://www.api.com/Index/User',
             type: 'GET',
-            data: { email: cookie.load('email') },
+            data: { email: this.state.email },
             success: function (result) {
                  // 判断用户是否为管理员
                 if (result['data']['group_id'] !== '1'){
@@ -55,12 +56,16 @@ class Users extends React.Component {
     pay(e) {
         e.preventDefault();
         $(".pay").animate({width: '300px',height: '150px',opacity: '1'},"slow");
-        cookie.save('mail', e.target.getAttribute('data'), {path: '/'});
+        if(cookie.load('mail') !== undefined) {
+            cookie.save('mail', e.target.getAttribute('data'), {path: '/'});
+        }
     }
 
     render() {
         const styles = require('./User.css');
-
+        let pagingOptions = {
+             showNumber: 3
+        }
         const usersItems = this.state.data.map(function (item) {
             return (
                 <ul key={item.id} id={item.id}>
@@ -93,6 +98,7 @@ class Users extends React.Component {
                             <li>操作</li>
                         </ol>
                         {usersItems}
+                        <PagingBar pagingOptions={pagingOptions} {...this.props} />
                     </div>
                 </div>
                 <Pay />
