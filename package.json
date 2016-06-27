@@ -20,6 +20,7 @@
   "dependencies": {
     "antd": "^1.0.1",
     "jquery": "^2.2.4",
+    "md5": "^2.1.0",
     "react": "^15.0.2",
     "react-cookie": "^0.4.5",
     "react-dom": "^15.0.2",

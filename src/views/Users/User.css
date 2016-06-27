@@ -78,6 +78,7 @@
     background: #f1f1f1;
 }
 .user-edit .edit{
+    width: 658px;
     border: 1px #ccc solid;
     background: #f1f1f1;
     padding: 20px;
@@ -158,6 +159,9 @@
     padding-left: 10px;
     line-height: 36px;
     color: #ff0000;
+}
+.changePassword{
+    display: none;
 }
 .pay{
     width: 0;

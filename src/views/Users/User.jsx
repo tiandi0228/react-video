@@ -3,6 +3,7 @@
 import React from 'react';
 import cookie from 'react-cookie';
 import $ from 'jquery';
+import hex_md5 from 'md5';
 import Header from './../Common/Header.jsx';
 import Footer from './../Common/Footer.jsx';
 
@@ -21,7 +22,8 @@ class User extends React.Component {
             group:'',
             groups: [],
             groupId: '',
-            gid: ''
+            gid: '',
+            oldPassword: ''
         };
 
         // 登录权限
@@ -50,7 +52,7 @@ class User extends React.Component {
                     email: user.email,
                     money: user.money,
                     username: user.username,
-                    password: user.password,
+                    oldPassword: user.password,
                     group: user.group,
                     gid: user.group_id
                 });
@@ -100,39 +102,78 @@ class User extends React.Component {
         this.setState({gid:this.refs.groups.value});
     }
 
+    // Tab
+    tab(){
+        const $span = $('.tab span');
+        const $con = $('.edit');
+        $span.click(function(){
+            const $this = $(this);
+            const $t = $this.index();
+            $span.removeClass();
+            $this.addClass('cur');
+            $con.css('display','none');
+            $con.eq($t).css('display','block');
+        })
+    }
+
     // 提交修改信息
     handleSubmit(e){
         e.preventDefault();
         let username = this.refs.username;
-        let password = this.refs.password;
-        let confirmPassword = this.refs.confirmPassword;
         let groups = this.refs.groups;
         let money = this.refs.money;
 
+        if(username.value === '')
+        {
+            $('.username .tips').html("<div class='error'>请输入昵称!</div>");
+            $('.username .tips .error').fadeIn("slow");
+        }
+
         if(username !== undefined){
             username = username.value;
-            if (password.value.length === 0){
-                password = this.state.password;
-                confirmPassword = password;
-            }else{
-                password = password.value;
-                confirmPassword = confirmPassword.value;
-            }
          }else{
             username = this.state.username;
-            password = password.value;
-            confirmPassword = confirmPassword.value;
          }
 
-        if (password.length === 0){
-            password = this.state.password;
-            confirmPassword = password;
-            if(groups !== undefined || money !== undefined){
-                groups = groups.value;
-                money = money.value;
-            }else{
-                groups = this.state.gid;
-                money = this.state.money;
+         if(groups !== undefined || money !== undefined){
+            groups = groups.value;
+            money = money.value;
+        }else{
+            groups = this.state.gid;
+            money = this.state.money;
+        }
+
+        $.ajax({
+            url:'http://www.api.com/Index/User/Edit',
+            type: 'POST',
+            data: { id: this.state.id, username: username, group_id: groups, money: money },
+            success: function (result) {
+                alert('修改成功!');
+                location.reload();
+            }.bind(this)
+        });    
+    }
+
+    // 修改密码
+    handleChangeSubmitPW(e){
+        e.preventDefault();
+        let oldPassword = this.refs.oldPassword.value;
+        let password = this.refs.password.value;
+        let confirmPassword = this.refs.confirmPassword.value;
+
+        if(this.state.gid !== '1'){
+            // 验证旧密码是否为空
+            if(oldPassword.length === 0){
+                $('.oldPassword .tips').html("<div class='error'>请输入旧密码!</div>");
+                $('.oldPassword .tips .error').fadeIn("slow");
+                return false;
+            }
+
+            // 判断旧密码正确性
+            if(this.state.oldPassword !== hex_md5(oldPassword)){
+                $('.oldPassword .tips').html("<div class='error'>请输入正确的旧密码!</div>");
+                $('.oldPassword .tips .error').fadeIn("slow");
+                return false;
             }
         }
 
@@ -158,14 +199,14 @@ class User extends React.Component {
         };
 
         $.ajax({
-            url:'http://www.api.com/Index/User/Edit',
+            url:'http://www.api.com/Index/User/ChangePassword',
             type: 'POST',
-            data: { id: this.state.id, username: username, password: password, group_id: groups, money: money },
+            data: { id: this.state.id, password: password },
             success: function (result) {
                 alert('修改成功!');
                 location.reload();
             }.bind(this)
-        });    
+        }); 
     }
 
     render() {
@@ -185,7 +226,7 @@ class User extends React.Component {
         // 判断昵称
         if(this.state.username === ''){
             nickname = <input type="text" ref="username" onChange={this.handleChange.bind(this)} />;
-            prompt = <span className="prompt">只能修改一次！</span>;
+            prompt = <div className='error' style={{display:'block'}}>只能修改一次！</div>;
         }else{
             nickname = <span className="username">{this.state.username}</span>;
             prompt = <span></span>;
@@ -207,22 +248,34 @@ class User extends React.Component {
             <div>
                 <Header />
                 <div className="user-edit">
-                    <div className="tab">
+                    <div className="tab" onClick={this.tab}>
                         <span className="cur">个人资料</span>
                         <span>修改密码</span>
                     </div>
                     <div className="edit">
-                        <form name="form" id="form" onSubmit={this.handleSubmit.bind(this) }>
-                        	<div className="ipt username">
-                	       <label>昵称：</label>
+                        	 <div className="ipt username">
+                	        <label>昵称：</label>
                                    {nickname}
-                                   <div className="tips"></div>
-                        	</div>
+                                   <div className="tips">{prompt}</div>
+                        	 </div>
                             <div className="ipt">
                                     <label>邮箱：</label>
                                     <span className="email">{this.state.email}</span>
                             </div>
-                            <div className="ipt password">
+                            <div className="ipt">
+                                    <label>用户组：</label>
+                                    {group}
+                            </div>
+                            <div className="ipt">
+                                    <label>金额：</label>
+                                    {gold}
+                            </div>
+                            <div className="ipt">
+                                    <button type="submit" className="btn" onClick={this.handleSubmit.bind(this)}>修 改</button>
+                            </div>
+                    </div>
+                    <div className="edit changePassword">
+                            <div className="ipt oldPassword">
                                     <label>旧密码：</label>
                                     <input type="password" ref="oldPassword" />
                                     <div className="tips"></div>
@@ -238,17 +291,8 @@ class User extends React.Component {
                                     <div className="tips"></div>
                             </div>
                             <div className="ipt">
-                                    <label>用户组：</label>
-                                    {group}
+                                    <button type="submit" className="btn" onClick={this.handleChangeSubmitPW.bind(this)}>修 改</button>
                             </div>
-                            <div className="ipt">
-                                    <label>金额：</label>
-                                    {gold}
-                            </div>
-                            <div className="ipt">
-                                    <button type="submit" className="btn">修 改</button>
-                            </div>
-                        </form>
                     </div>
                 </div>
                 <Footer />
